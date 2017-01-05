@@ -10,7 +10,7 @@ import static jdk.nashorn.internal.objects.NativeString.charAt;
 import static jdk.nashorn.internal.objects.NativeString.toUpperCase;
 
 /**
- * Created by Andrey on 24.12.2016.
+ * Created by Andrey Khudyakov on 24.12.2016.
  */
 public class Home2 {
     public static void main(String[] args) throws IOException {
@@ -235,11 +235,10 @@ public class Home2 {
 
     public static boolean IsPalidrom (String str) {
 
-        int endFirstPart = 0;
 
         int lenghtPalidrom = str.length();
 
-        endFirstPart = lenghtPalidrom / 2;
+        int endFirstPart = lenghtPalidrom / 2; // start next part without considering array starts with 0; and size of array
 
 
         //String[] firstPart  = new String [endFirstPart];
@@ -257,11 +256,12 @@ public class Home2 {
         str.getChars(endFirstPart, lenghtPalidrom, secondPartCharArr, 0);// copy remain part to second char array
 
 
-        int returncount = endFirstPart - 1; //because of array starts with 0. Start with last element
-        for (int count = 0; count < endFirstPart; count++) { //count - number of elements of second part of Palidrom
+        //int returncount = endFirstPart - 1; //because of array starts with 0. Start with last element
+
+        for ( int returncount = endFirstPart - 1 ; returncount >= 0; returncount--) { //count - number of elements of second part of Palidrom
 
             secondPart = secondPart + String.valueOf(secondPartCharArr[returncount]); // turn over in the opposite direction
-            returncount--;
+
         }
         //System.out.println(secondPart);
         boolean result = firstPart.equalsIgnoreCase(secondPart); //comparison 2 arrays without considering Case
