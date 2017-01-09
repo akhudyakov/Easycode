@@ -54,7 +54,7 @@ public class Home3 {
         //  Origin Array
 
         //int originArray[] = {-9,  26, -3, 5, 12, -30,  17, -20, 6 }; // 9 items without 0
-        int originArray[] = {-9, 0, 26, -3, 5, 12, -30, 0, 17, -20, 6, 0 }; // 12 items
+        int originArray[] = {-9, 0, 26, -3, 5, 12, -30, 0, 17, -20, 6, 0}; // 12 items
 
         // Calculate negative items of the origin array
 
@@ -75,7 +75,7 @@ public class Home3 {
 
         int multipleEvenMembers = 1;
 
-        for ( int e = 0; e < originArray.length; e++) {
+        for (int e = 0; e < originArray.length; e++) {
             multipleEvenMembers = multipleEvenMembers * originArray[e];
             e = e + 1;
         }
@@ -86,10 +86,10 @@ public class Home3 {
         findFirstAndLastPositionOfZero(originArray);
 
         // Sort array: first are positive and zeros, after negative items without sorting of the array
-        int [] resultSortArray = sortArrayFirstPositiveItems(originArray);
+        int[] resultSortArray = sortArrayFirstPositiveItems(originArray);
 
         System.out.println("\n *****  Sorting of  array: first are positive and zeros, after negative items without sorting of the array ****");
-        System.out.println( "Result is: " + Arrays.toString(resultSortArray) + ". Expected: 0, 26, 5, 12, 0, 17, 6, 0, -9, -3, -30, -20] ");
+        System.out.println("Result is: " + Arrays.toString(resultSortArray) + ". Expected: 0, 26, 5, 12, 0, 17, 6, 0, -9, -3, -30, -20] ");
 
         // return Max item of the array
         int maxItem = maxItemOfArray(originArray);
@@ -101,7 +101,7 @@ public class Home3 {
         int lastPositivePosition = -1;
 
 
-        for (int count = 0; count < originArray.length ; count++) {
+        for (int count = 0; count < originArray.length; count++) {
             if (originArray[count] > 0) {
                 lastPositivePosition = count; // remember positions of positive items
             }
@@ -125,7 +125,7 @@ public class Home3 {
 
         int replaceValue = 0;
 
-        int [] newCopyArr = Arrays.copyOf(originArray, originArray.length); // work with another array
+        int[] newCopyArr = Arrays.copyOf(originArray, originArray.length); // work with another array
 
         newCopyArr = compressArrayInRange(newCopyArr, startRange, endRange, replaceValue);
         System.out.println("\n Compress the array by removing digits belong to range Math.abs[10,20] including that values: " + Arrays.toString(newCopyArr));
@@ -154,7 +154,7 @@ public class Home3 {
         // even members are in the start of an array
         // odd members are in the end of the array
 
-        int [] newEvenOddArray = Arrays.copyOf(originArray, originArray.length); // do not use origin array
+        int[] newEvenOddArray = Arrays.copyOf(originArray, originArray.length); // do not use origin array
 
         newEvenOddArray = getArrayEvenMemeberFirst(newEvenOddArray);
         System.out.println(" New array with First members are Even: " + Arrays.toString(newEvenOddArray) + ". Expected {-9, 26, 5, -30, 17, 6, 0, -3, 12, 0, -20, 0 } ");
@@ -162,23 +162,46 @@ public class Home3 {
 
         // Two sized array
 
-        int originTwoArray [] [] =              { {10, 0, -6, 33, 33, -60, 4},
-                                                   {-19, 73, 73, 73, 0, -55, 1},
-                                                   {2, 7, -42, 10, 18, 8, -12 },
-                                                   {0, 13, -22, 11, 88, 15, -1},
-                                                   {9, 60, 4, -5, 6, 63, 28},
-                                                   {3, 5, 5, 5, 5, 18, -1},
-                                                   {8, - 13, 44, -2, 9, 14, 17}   };
+        int originTwoArray[][] = {{10, 0, -6, 33, 33, -60, 4},
+                                 {-19, 73, 73, 73, 0, -55, 1},
+                                 {2, 7, -42, 10, 18, 8, -12},
+                                 {0, 13, -22, 11, 88, 15, -1},
+                                 {9, 60, 4, -5, 6, 63, 28},
+                                 {3, 5, 5, 5, 5, 18, -1},
+                                 {8, -13, 44, -2, 9, 14, 17}};
 
-        int max = maxItemOfArray(originTwoArray) ;
-        System.out.println(max);
+        //int max = maxItemOfArray(originTwoArray);
+        //System.out.println(max);
+
+        // Get number of rows without some value
+
+        int someValue = 0;
+
+        int numberRowsWithoutValue = getNumberOfRowsWithoutSomeValue(originTwoArray, someValue);
+
+        System.out.println("\n *** Number of rows without the value " + someValue + " equals = " + numberRowsWithoutValue + " rows *** ");
+
+        // Find Max item of an array which meets more than 1 time
+
+        int countMeetOfMaxInArray = 0;
+
+        int maxItemInArray = maxItemOfArray(originTwoArray);
+
+        do {
+
+            countMeetOfMaxInArray = getNumberOfRowsWithSomeValue(originTwoArray, maxItemInArray);
+
+            if (countMeetOfMaxInArray < 2) {
+
+                maxItemInArray = maxItemOfArrayWithExcluding(originTwoArray, maxItemInArray);
+            }
+
+        } while (countMeetOfMaxInArray > 1);
+
+        System.out.println("\n *** Max item in array which meets more than 1 time  = " + maxItemInArray + "  *** ");
 
 
     }
-
-
-
-
 
 
     // Calculation of negative items of the origin array
@@ -244,7 +267,7 @@ public class Home3 {
         return multipleItems;
     }
 
-    public static void findFirstAndLastPositionOfZero (int arr[]) {
+    public static void findFirstAndLastPositionOfZero(int arr[]) {
 
         int firstPositionOfZero = -1; // it is possible that there is no zero in array
         int lastPositionOfZero = -1;
@@ -260,7 +283,7 @@ public class Home3 {
         }
         if (firstPositionOfZero == -1) {
             System.out.println("\n There is no Zero in the array");
-        } else if (firstPositionOfZero >= 0 && lastPositionOfZero == -1){
+        } else if (firstPositionOfZero >= 0 && lastPositionOfZero == -1) {
             System.out.println("\n There is only 1 Zero in the array");
         } else {
             int sumOfItemsBetweenZeros = calculateSumOfArrayItemsBetweenFirstAndLstPositions(arr, firstPositionOfZero, lastPositionOfZero);
@@ -269,28 +292,28 @@ public class Home3 {
     }
 
 
-    public static int calculateSumOfArrayItemsBetweenFirstAndLstPositions (int arr[], int firstPosition, int lastPosition) {
+    public static int calculateSumOfArrayItemsBetweenFirstAndLstPositions(int arr[], int firstPosition, int lastPosition) {
 
         int sumBeetweenMarginalPositions = 0;
 
-        for (int i = firstPosition; i <= lastPosition ; i++) {
-           sumBeetweenMarginalPositions = sumBeetweenMarginalPositions + arr[i];
+        for (int i = firstPosition; i <= lastPosition; i++) {
+            sumBeetweenMarginalPositions = sumBeetweenMarginalPositions + arr[i];
         }
 
         return sumBeetweenMarginalPositions;
     }
 
-    public static int [] sortArrayFirstPositiveItems (int [] arr) {
+    public static int[] sortArrayFirstPositiveItems(int[] arr) {
 
-        int negativeArr [] = new int [arr.length];  // create  array for negative values
-        int positiveArr [] = new int [arr.length]; // create  array for positive (include 0) values
-        int resultArr [] = new int [arr.length];
+        int negativeArr[] = new int[arr.length];  // create  array for negative values
+        int positiveArr[] = new int[arr.length]; // create  array for positive (include 0) values
+        int resultArr[] = new int[arr.length];
 
 
         int countNegativeArr = 0; //  count for negative values
         int countPositiveArr = 0;
 
-        for (int i = 0; i < arr.length ; i++) {
+        for (int i = 0; i < arr.length; i++) {
 
             if (arr[i] < 0) {
                 negativeArr[countNegativeArr] = arr[i];// fill out negatve  array starting with 0
@@ -302,22 +325,22 @@ public class Home3 {
             }
         }
 
-        for (int j = 0; j <= countPositiveArr ; j++) {
+        for (int j = 0; j <= countPositiveArr; j++) {
             resultArr[j] = positiveArr[j];  // fill out existed array ARR by positive values from positive array
         }
 
-            int negativeCount = arr.length - countNegativeArr; // number of negative itens
-            int negativeStart = 0; // counter for neagative arrays, because it contains items starting from 0
+        int negativeCount = arr.length - countNegativeArr; // number of negative itens
+        int negativeStart = 0; // counter for neagative arrays, because it contains items starting from 0
 
-        for (int y = negativeCount; y < arr.length ; y++) {
+        for (int y = negativeCount; y < arr.length; y++) {
             resultArr[y] = negativeArr[negativeStart];
-            negativeStart ++;
+            negativeStart++;
         }
         return resultArr;
     }
 
 
-    public static int  maxItemOfArray (int [] arr) {
+    public static int maxItemOfArray(int[] arr) {
         int maxItem = arr[0];
 
         for (int i = 1; i < arr.length; i++) {
@@ -325,19 +348,19 @@ public class Home3 {
                 maxItem = arr[i];
             }
         }
-            return maxItem;
+        return maxItem;
 
     }
 
 
-    public static int [] compressArrayInRange (int [] arr, int start, int end, int byValue) {
+    public static int[] compressArrayInRange(int[] arr, int start, int end, int byValue) {
 
         int countItemsInNotRange = 0;
 
-        int [] newArr =  new int [arr.length];
+        int[] newArr = new int[arr.length];
 
-        for (int i = 0; i < arr.length ; i++) {
-             if (!(Math.abs(arr[i]) >= start & Math.abs(arr[i]) <= end)) { // items which should not be changed go into new array
+        for (int i = 0; i < arr.length; i++) {
+            if (!(Math.abs(arr[i]) >= start & Math.abs(arr[i]) <= end)) { // items which should not be changed go into new array
                 newArr[countItemsInNotRange] = arr[i];
                 countItemsInNotRange++;
             }
@@ -351,7 +374,7 @@ public class Home3 {
     }
 
 
-    public static int  minItemOfArray (int [] arr) {
+    public static int minItemOfArray(int[] arr) {
         int minItem = arr[0];
 
         for (int i = 1; i < arr.length; i++) {
@@ -364,11 +387,11 @@ public class Home3 {
     }
 
 
-    public static int findFirstPositionOfItemInArray (int [] arr, int value) {
+    public static int findFirstPositionOfItemInArray(int[] arr, int value) {
 
         int positionFirstValue = -100; // there is no the Value in the array
 
-        for (int i = 0; i < arr.length ; i++) {
+        for (int i = 0; i < arr.length; i++) {
             if (arr[i] == value) {
                 positionFirstValue = i;
                 return positionFirstValue; // find first encounter of the Value
@@ -378,7 +401,7 @@ public class Home3 {
         return positionFirstValue;
     }
 
-    public static int calculateSumModulesOfItems (int [] arr, int startPositionValue) {
+    public static int calculateSumModulesOfItems(int[] arr, int startPositionValue) {
 
         int sumModules = 0;
 
@@ -393,59 +416,58 @@ public class Home3 {
     }
 
 
-
-    public static int [] getArrayEvenMemeberFirst (int [] arr) {
+    public static int[] getArrayEvenMemeberFirst(int[] arr) {
 
         //int lengthArr = arr.length;
         //boolean evenMembers = false;
 
-        int lenghtOddArr =  arr.length/2;
-        int lenghtEvenArr =  arr.length/2;
+        int lenghtOddArr = arr.length / 2;
+        int lenghtEvenArr = arr.length / 2;
 
 
-        if (arr.length%2 != 0 ) {
-        // evenMembers = true;
-        lenghtEvenArr = lenghtEvenArr + 1;
+        if (arr.length % 2 != 0) {
+            // evenMembers = true;
+            lenghtEvenArr = lenghtEvenArr + 1;
         }
 
 
-        int [] evenArr = new int [lenghtEvenArr];
-        int [] oddArr = new int [lenghtOddArr];
+        int[] evenArr = new int[lenghtEvenArr];
+        int[] oddArr = new int[lenghtOddArr];
 
         int evenCounter = 0;
         int oddCounter = 0;
 
-        for (int i = 0; i < arr.length ; i++) {
-            if (i%2 == 0) {
+        for (int i = 0; i < arr.length; i++) {
+            if (i % 2 == 0) {
                 evenArr[evenCounter] = arr[i];
-                evenCounter ++;
+                evenCounter++;
             } else {
-             oddArr[oddCounter] = arr[i];
-             oddCounter ++;
+                oddArr[oddCounter] = arr[i];
+                oddCounter++;
             }
         }
 
         for (int i = 0; i < evenCounter; i++) {
-            arr [i] = evenArr[i];
+            arr[i] = evenArr[i];
         }
 
-        for (int i = 0; i < oddCounter ; i++) {
+        for (int i = 0; i < oddCounter; i++) {
             arr[evenCounter] = oddArr[i];
-            evenCounter ++;
+            evenCounter++;
         }
         //arr = Arrays.copyOfRange(oddArr, 0, oddCounter);
         return arr;
     }
 
 
-    public static int maxItemOfArray(int [] [] arr) {
+    public static int maxItemOfArray(int[][] arr) {
 
-        int maxItem = arr [0] [0];
+        int maxItem = arr[0][0];
 
         for (int i = 0; i < arr.length; i++) {
             for (int j = 0; j < arr[i].length; j++) {
-                if (maxItem < arr[i] [j]) {
-                    maxItem = arr[i] [j];
+                if (maxItem < arr[i][j]) {
+                    maxItem = arr[i][j];
                 }
 
             }
@@ -458,21 +480,64 @@ public class Home3 {
     // get number of rows without some value
 
 
+    public static int getNumberOfRowsWithoutSomeValue(int[][] arr, int value) {
 
-    public static int getNumberOfRowsWithoutSomeValue(int [] [] arr, int value) {
+        StringBuffer existValueInRow = new StringBuffer();
 
-        StringBuffer  existValueInRow = new StringBuffer();
+        int countRows = 0; // there is no the value in the array
 
         for (int i = 0; i < arr.length; i++) {
             for (int j = 0; j < arr[i].length; j++) {
 
-                if (arr[i] [j] == value) {
-                    if ((existValueInRow.indexOf(String.valueOf(i)))) {
-
-                 existValueInRow.append(i);
+                if (arr[i][j] == value) {
+                    if ((existValueInRow.indexOf(String.valueOf(i))) <= 0) { // create string array with unique number of row
+                                                                             // if there is number in the array we don't add it to array
+                        countRows ++; // number of rows with existed value
+                        existValueInRow.append(i); // string array with number of each row which contains the value
+                    }
                 }
+            }
         }
+        int notExistedCountRow = arr.length - countRows; // number of rows which do not contains the value
+        return notExistedCountRow;
     }
+
+    public static int maxItemOfArrayWithExcluding(int[][] arr, int excludMax) {
+
+        int maxItem = arr[0][0];
+
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr[i].length; j++) {
+                if (maxItem < arr[i][j] & maxItem != excludMax) {
+                    maxItem = arr[i][j];
+                }
+
+            }
+
+        }
+        return maxItem;
+    }
+
+    public static int getNumberOfRowsWithSomeValue(int[][] arr, int value) {
+
+        StringBuffer existValueInRow = new StringBuffer();
+
+        int countRows = 0; // there is no the value in the array
+
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr[i].length; j++) {
+
+                if (arr[i][j] == value) {
+                    if ((existValueInRow.indexOf(String.valueOf(i))) <= 0) { // create string array with unique number of row
+                        // if there is number in the array we don't add it to array
+                        countRows ++; // number of rows with existed value
+                        existValueInRow.append(i); // string array with number of each row which contains the value
+                    }
+                }
+            }
+        }
+
+        return countRows;
+    }
+
 }
-
-
