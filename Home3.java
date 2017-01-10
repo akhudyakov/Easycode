@@ -1,8 +1,6 @@
 package HomeTask_3;//package com.company;
 
 
-import com.sun.deploy.util.ArrayUtil;
-
 import java.io.IOException;
 import java.util.Arrays;
 
@@ -49,7 +47,7 @@ public class Home3 {
 
         System.out.println("\n Fill out main and opposite diagonals of array by 5");
         fillMainAndOpositediagonalOfArray();
-*/
+
 
         //  Origin Array
 
@@ -137,7 +135,7 @@ public class Home3 {
         System.out.println("\n ****   Min item of the array is = " + minItem + ". Expected: -30 ****");
 
 
-        // Calculte sum of Math.abs of array's items after First 0
+        // Calculate sum of Math.abs of array's items after First 0
 
         int findValue = 0;
 
@@ -159,16 +157,25 @@ public class Home3 {
         newEvenOddArray = getArrayEvenMemeberFirst(newEvenOddArray);
         System.out.println(" New array with First members are Even: " + Arrays.toString(newEvenOddArray) + ". Expected {-9, 26, 5, -30, 17, 6, 0, -3, 12, 0, -20, 0 } ");
 
+*/
 
         // Two sized array
-
+        /*
         int originTwoArray[][] = {{10, 0, -6, 33, 33, -60, 4},
                                  {-19, 73, 73, 73, 0, -55, 1},
                                  {2, 7, -42, 10, 18, 8, -12},
                                  {0, 13, -22, 11, 88, 15, -1},
                                  {9, 60, 4, -5, 6, 63, 28},
                                  {3, 5, 5, 5, 5, 18, -1},
-                                 {8, -13, 44, -2, 9, 14, 17}};
+                                 {8, -13, 44, -2, 9, 14, 17}}; */
+        // array with unique items
+        int originTwoArray[][] = {{10, 0, -6, 33, 99, -60, 4},
+                                  {-19, 73, 98, 97, 0, -55, 1},
+                                  {2, 7, -42, 91, 18, 8, -12},
+                                  {-20, -13, -22, 11, 88, 15, -1},
+                                  {9, 60, 4, -5, 6, 63, 28},
+                                  {3, 5, 92, 95, 94, 93, -92},
+                                  {-61, -13, 44, -2, 90, 14, 17}};
 
         //int max = maxItemOfArray(originTwoArray);
         //System.out.println(max);
@@ -182,25 +189,35 @@ public class Home3 {
         System.out.println("\n *** Number of rows without the value " + someValue + " equals = " + numberRowsWithoutValue + " rows *** ");
 
         // Find Max item of an array which meets more than 1 time
+        // p.s. issue starts when max item < first item
 
         int countMeetOfMaxInArray = 0;
 
+        int countNotSuitableMax = 0;
+
         int maxItemInArray = maxItemOfArray(originTwoArray);
 
-        do {
+        int [] maxItemsArray = new int [originTwoArray.length * originTwoArray.length ];
 
-            countMeetOfMaxInArray = getNumberOfRowsWithSomeValue(originTwoArray, maxItemInArray);
+        while (countMeetOfMaxInArray  <=  1 & countNotSuitableMax < originTwoArray.length * originTwoArray.length ) {
+
+            countMeetOfMaxInArray = getCountOfNumberSomeValueMeets(originTwoArray, maxItemInArray);
 
             if (countMeetOfMaxInArray < 2) {
 
-                maxItemInArray = maxItemOfArrayWithExcluding(originTwoArray, maxItemInArray);
+                maxItemsArray[countNotSuitableMax] = maxItemInArray;
+                countNotSuitableMax++;
+                maxItemInArray = maxItemOfArrayWithExcluding(originTwoArray, maxItemsArray, countNotSuitableMax);
+
             }
 
-        } while (countMeetOfMaxInArray > 1);
+        }
 
-        System.out.println("\n *** Max item in array which meets more than 1 time  = " + maxItemInArray + "  *** ");
-
-
+        if (maxItemInArray == minItemOfArray(originTwoArray)) {
+            System.out.println("\n ***** There is no item in the array which meets more than 1 time ****");
+        } else {
+            System.out.println("\n *** Max item in array which meets more than 1 time  = " + maxItemInArray + "  *** ");
+        }
     }
 
 
@@ -476,6 +493,22 @@ public class Home3 {
         return maxItem;
     }
 
+    public static int minItemOfArray(int[][] arr) {
+
+        int minItem = arr[0][0];
+
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr[i].length; j++) {
+                if ( arr[i][j] < minItem ){
+                    minItem = arr[i][j];
+                }
+
+            }
+
+        }
+        return minItem;
+    }
+
 
     // get number of rows without some value
 
@@ -490,8 +523,8 @@ public class Home3 {
             for (int j = 0; j < arr[i].length; j++) {
 
                 if (arr[i][j] == value) {
-                    if ((existValueInRow.indexOf(String.valueOf(i))) <= 0) { // create string array with unique number of row
-                                                                             // if there is number in the array we don't add it to array
+                    if ((existValueInRow.indexOf(String.valueOf(i))) < 0) { // create string array with unique number of row
+                                                                             // if there is no the value (position in array) in the array we add it to array
                         countRows ++; // number of rows with existed value
                         existValueInRow.append(i); // string array with number of each row which contains the value
                     }
@@ -502,42 +535,49 @@ public class Home3 {
         return notExistedCountRow;
     }
 
-    public static int maxItemOfArrayWithExcluding(int[][] arr, int excludMax) {
+    public static int maxItemOfArrayWithExcluding(int[][] arr, int [] excludMax, int countExclud) {
 
-        int maxItem = arr[0][0];
+        int maxItem = minItemOfArray(arr);
+        boolean existInExclud = false;
 
         for (int i = 0; i < arr.length; i++) {
             for (int j = 0; j < arr[i].length; j++) {
-                if (maxItem < arr[i][j] & maxItem != excludMax) {
-                    maxItem = arr[i][j];
+
+                if (maxItem < arr[i][j]) {
+                    for (int z = 0; z < countExclud; z++) {
+
+                        if (arr[i][j] == excludMax[z]) {
+                            existInExclud = true;
+                        }
+                    }
+                        if (existInExclud == false ) {
+                            maxItem = arr[i][j];
+                        }
                 }
-
             }
-
+            existInExclud = false;
         }
         return maxItem;
     }
 
-    public static int getNumberOfRowsWithSomeValue(int[][] arr, int value) {
+    public static int getCountOfNumberSomeValueMeets(int[][] arr, int value) {
 
-        StringBuffer existValueInRow = new StringBuffer();
-
-        int countRows = 0; // there is no the value in the array
+        int countMeet = 0; // there is no the value in the array
 
         for (int i = 0; i < arr.length; i++) {
             for (int j = 0; j < arr[i].length; j++) {
 
                 if (arr[i][j] == value) {
-                    if ((existValueInRow.indexOf(String.valueOf(i))) <= 0) { // create string array with unique number of row
-                        // if there is number in the array we don't add it to array
-                        countRows ++; // number of rows with existed value
-                        existValueInRow.append(i); // string array with number of each row which contains the value
-                    }
+                        countMeet ++; // number of rows with existed value
+
                 }
             }
         }
 
-        return countRows;
+        return countMeet;
     }
+
+
+
 
 }
