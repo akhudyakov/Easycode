@@ -9,7 +9,7 @@ import java.util.UUID;
  */
 public class Student {
 
-    UUID id;
+    private UUID id;
     private String lastName;
     private String fisrtName;
     private String middleName;
@@ -18,15 +18,15 @@ public class Student {
     private String email;
     private String documentType;
     private String documentNumber;
-    private int numberOfFaculty;
+ /*   private int numberOfFaculty;
     private int numberOfCource;
-    private String groupNumber;
+    private String groupNumber; */
 
-    public int maxCource;
-    private final int incrementOfCource = 1;
+    private int maxCource = 6;
+    private final int incrementOfCourse = 1;
 
     public Student(String lastName, String fisrtName, String middleName, Date birthDate, String docType, String docNumber) {
-        UUID uuid = UUID.randomUUID();
+        this.id = UUID.randomUUID();
 
         this.fisrtName = fisrtName;
         this.lastName = lastName;
@@ -34,7 +34,7 @@ public class Student {
         this.birthDate = birthDate;
         this.documentType = docType;
         this.documentNumber = docNumber;
-        this.id = uuid;
+
     }
 
 
@@ -74,7 +74,7 @@ public class Student {
         return documentNumber;
     }
 
-    public int getNumberOfFaculty() {
+    /*public int getNumberOfFaculty() {
         return numberOfFaculty;
     }
 
@@ -84,14 +84,14 @@ public class Student {
 
     public String getGroupNumber() {
         return groupNumber;
-    }
+    }*/
 
     public int getMaxCource() {
         return maxCource;
     }
 
     public int getIncrementOfCource() {
-        return incrementOfCource;
+        return incrementOfCourse;
     }
 
     public void setPhoneNumber(String phoneNumber) {
@@ -102,7 +102,7 @@ public class Student {
         this.email = email;
     }
 
-    public void setNumberOfFaculty(int numberOfFaculty) {
+    /*public void setNumberOfFaculty(int numberOfFaculty) {
         this.numberOfFaculty = numberOfFaculty;
     }
 
@@ -114,13 +114,15 @@ public class Student {
         this.groupNumber = groupNumber;
     }
 
+
+    // transfer a student to next cource
     public void transferToNextCourse() {
 
-        if (numberOfCource + incrementOfCource <= maxCource) {
-            numberOfCource += incrementOfCource;
+        if (numberOfCource + incrementOfCourse <= maxCource) {
+            numberOfCource += incrementOfCourse;
         }
 
-    }
+    } */
 
     @Override // set  by myself
     public String toString() {
@@ -130,7 +132,7 @@ public class Student {
         String result = "student ID = " + getId() + "; Last Name = " + getLastName() + "; First Name = " + getFisrtName() +
                 "; Middle Name = " + getMiddleName() + "; Birthdate = " + formatter.format(getBirthDate()) + "; Document =  "
                 + getDocumentType() + "; Serie = " + getDocumentNumber() + "; Email = " + getEmail() +
-                "; Phone number = " + getPhoneNumber() + "; Faculty = " + getNumberOfFaculty();
+                "; Phone number = " + getPhoneNumber();// + "; Faculty = " + getNumberOfFaculty();
 
         return result;
     }
@@ -141,6 +143,7 @@ public class Student {
         if (o == null) return false;
         if (this instanceof Object) return true;
         if (this.getClass() != o.getClass()) return false;
+        if (this.hashCode() != o.hashCode()) return false;
 
 
         Student s = (Student) o;
@@ -155,14 +158,28 @@ public class Student {
         if (this.email != s.email) return false;
         if (this.phoneNumber == null) return s.phoneNumber == null;
         if (this.phoneNumber != s.phoneNumber) return false;
-        if (this.numberOfFaculty != s.numberOfFaculty) return false;
+        /*if (this.numberOfFaculty != s.numberOfFaculty) return false;
         if (this.numberOfCource != s.numberOfCource) return false;
         if (this.groupNumber == null) return s.groupNumber==null;
-        if (this.groupNumber != s.groupNumber) return false;
+        if (this.groupNumber != s.groupNumber) return false; */
 
         return true;
     }
 
-
-
+    @Override
+    public int hashCode() {
+        int result = id.hashCode();
+        result = 31 * result + lastName.hashCode();
+        result = 31 * result + fisrtName.hashCode();
+        result = 31 * result + middleName.hashCode();
+        result = 31 * result + birthDate.hashCode();
+        result = 31 * result + phoneNumber.hashCode();
+        result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + documentType.hashCode();
+        result = 31 * result + documentNumber.hashCode();
+        /*result = 31 * result + numberOfFaculty;
+        result = 31 * result + numberOfCource;
+        result = 31 * result + (groupNumber != null ? groupNumber.hashCode() : 0); */
+        return result;
+    }
 }
