@@ -1,6 +1,7 @@
 package HomeTask4_classes;
 
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.UUID;
 
@@ -18,11 +19,12 @@ public class Student {
     private String email;
     private String documentType;
     private String documentNumber;
+    private int[][] arrayOfHt;
  /*   private int numberOfFaculty;
     private int numberOfCource;
     private String groupNumber; */
 
-    private int maxCource = 6;
+    private int maxCourses = 6; // max number of courses
     private final int incrementOfCourse = 1;
 
     public Student(String lastName, String fisrtName, String middleName, Date birthDate, String docType, String docNumber) {
@@ -74,6 +76,8 @@ public class Student {
         return documentNumber;
     }
 
+
+
     /*public int getNumberOfFaculty() {
         return numberOfFaculty;
     }
@@ -86,8 +90,8 @@ public class Student {
         return groupNumber;
     }*/
 
-    public int getMaxCource() {
-        return maxCource;
+    public int getMaxCourses() {
+        return maxCourses;
     }
 
     public int getIncrementOfCource() {
@@ -150,7 +154,7 @@ public class Student {
         if (this.id != s.id) return false;
         if (this.fisrtName != s.fisrtName) return false;
         if (this.lastName != s.lastName) return false;
-        if (this. middleName != s.middleName) return false;
+        if (this.middleName != s.middleName) return false;
         if (this.birthDate != s.birthDate) return false;
         if (this.documentType != s.documentType) return false;
         if (this.documentNumber != s.documentNumber) return false;
@@ -181,5 +185,59 @@ public class Student {
         result = 31 * result + numberOfCource;
         result = 31 * result + (groupNumber != null ? groupNumber.hashCode() : 0); */
         return result;
+    }
+
+    public String getStudentFullNameByStudentId(UUID id) {
+
+        String result = "\0";
+
+        if (this.id == id) {
+            result = this.lastName + " " + this.fisrtName + " " + this.middleName;
+        }
+        return result;
+    }
+
+
+    public void addHomeTaskToStudent(HomeTask ht) {
+
+        int numberHT = ht.getNumberOfHt();
+
+
+        if (this.arrayOfHt == null) {
+            this.arrayOfHt = new int[1][0];
+        }
+
+
+        if (Arrays.binarySearch(this.arrayOfHt, numberHT) < 0) {
+
+
+            this.arrayOfHt = copyArr(this.arrayOfHt);
+            this.arrayOfHt[(arrayOfHt.length - 1)][0] = numberHT;
+//            int[][] arrayOfHt2 = Arrays.copyOf(this.arrayOfHt, this.arrayOfHt.length + 1);
+//            arrayOfHt2[0][0] = numberHT;
+
+        } else {
+            System.out.println(" !!! HomeTask with number: " + numberHT + " has already added into to Student with Id" + this.getId() + " !!! ");
+        }
+    }
+
+
+
+
+    public static int[][] copyArr(final int[][] array) {
+        if (array != null) {
+            final int[][] copy = new int[array.length + 1 ][];
+
+            for (int i = 0; i < array.length; i++) {
+                final int[] row = array[i];
+
+                copy[i] = new int[row.length];
+                System.arraycopy(row, 0, copy[i], 0, row.length);
+            }
+
+            return copy;
+        }
+
+        return null;
     }
 }
