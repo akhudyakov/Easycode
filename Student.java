@@ -23,7 +23,7 @@ public class Student {
     private int numberOfCource;
     private String groupNumber; */
 
-    private int maxCourses = 6; // max number of courses
+    private final int maxCourses = 6; // max number of courses
     private final int incrementOfCourse = 1;
 
     public Student(String lastName, String fisrtName, String middleName, Date birthDate, String docType, String docNumber) {
@@ -127,7 +127,7 @@ public class Student {
 
     } */
 
-    @Override // set  by myself
+    @Override
     public String toString() {
 
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");  //("yyyy-MM-dd");
@@ -236,37 +236,48 @@ public class Student {
     }
 
 
-    public static void listOfStudentTasksWithMarks(Student st) {
-        String result = " Student " + getStudentFullNameByStudent(st) + " has next tasks: ";
+    public static void printListOfStudentTasksWithMarks(Student st) {
+        String result = " Student " + getStudentFullNameByStudent(st) + " has next tasks with marks (if mark = 0 - it means that mark is not set) : ";
 
         System.out.println(result);
 
         for (int i = 0; i < st.arrayOfHt.length; i++) {
 
-            result = "{ Number of task: " + st.arrayOfHt[i][0] + " Mark of the task: " + st.arrayOfHt[i][1] + " }";
+            result = "{ Number of task: " + st.arrayOfHt[i][0] + "; Mark of the task: " + st.arrayOfHt[i][1] + " }";
             ;
 
             System.out.println(result);
         }
     }
 
-    //public getTaskMark
+
+    public static int[][] getListOfStudentTasksWithMarks(Student st) {
+
+        int[][] result = st.arrayOfHt;
+        return result;
+    }
+
     public static void setTaskMarkToStudentByNumberTask(Student st, int numberTask, int mark) {
         int position = -1;
 
-        for (int i = 0; i < st.arrayOfHt.length; i++) {
-            if (st.arrayOfHt[i][0] == numberTask) {
-                position = i;
-                break;
-            }
-        }
+        if (mark >= HomeTask.getMinMark() & mark <= HomeTask.getMaxMark()) {
 
-        if (position > -1) {
-            st.arrayOfHt[position][1] = mark;
-            System.out.println("Indicated task: " + numberTask + " has been added to student " + getStudentFullNameByStudent(st) );
+            for (int i = 0; i < st.arrayOfHt.length; i++) {
+                if (st.arrayOfHt[i][0] == numberTask) {
+                    position = i;
+                    break;
+                }
+            }
+
+            if (position > -1) {
+                st.arrayOfHt[position][1] = mark;
+                System.out.println("Indicated task: \"" + numberTask + "\" has been added to student " + getStudentFullNameByStudent(st));
+            } else {
+                System.out.println("Student " + getStudentFullNameByStudent(st) + " does not have indicated task: " + numberTask);
+                return;
+            }
         } else {
-            System.out.println("Student " + getStudentFullNameByStudent(st) + " does not have indicated task: " + numberTask);
-            return;
+            System.out.println("You inputted incorrect mark: " + mark);
         }
 
     }

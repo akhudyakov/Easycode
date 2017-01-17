@@ -1,7 +1,6 @@
 package HomeTask4_classes;
 
 import java.sql.Date;
-import java.util.Arrays;
 
 
 /**
@@ -48,13 +47,14 @@ public class MyInstitute {
             newStudent1.addHomeTaskToStudent(newHomeTask3);
 
 //            Student.listOfStudentTasks(newStudent1);
-            Student.setTaskMarkToStudentByNumberTask(newStudent1,2, 12);
+            Student.setTaskMarkToStudentByNumberTask(newStudent1,1, 12);
             Student.setTaskMarkToStudentByNumberTask(newStudent1,3, 6);
-            Student.listOfStudentTasksWithMarks(newStudent1);
+            Student.printListOfStudentTasksWithMarks(newStudent1);
 
             Student.listOfStudentTasks(newStudent1);
             Student.listOfStudentTasks(newStudent2);
 
+            System.out.println(WorkWithHomeTasks.getAverageMarkByStudent(newStudent1));
 
 
         }

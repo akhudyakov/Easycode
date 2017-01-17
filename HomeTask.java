@@ -13,6 +13,9 @@ public class HomeTask {
     private String textOfHt;
     private static int count;
 
+    private final static int minMark = 2;
+    private final static int maxMark = 12;
+
 
     public HomeTask(String subjectOfHt, String headerOfHt, String textOfHt) {
         count ++;
@@ -44,6 +47,9 @@ public class HomeTask {
         return textOfHt;
     }
 
+    public static int getMinMark() {        return minMark;    }
+
+    public static int getMaxMark() {        return maxMark;    }
 
     public String toString() {
         String result = "Home task with ID: " + getId() + " and its number: " + getNumberOfHt() + " has the  Subject: " + getSubjectOfHt() +
