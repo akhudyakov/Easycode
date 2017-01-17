@@ -1,7 +1,6 @@
 package HomeTask4_classes;
 
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.UUID;
 
@@ -187,13 +186,16 @@ public class Student {
         return result;
     }
 
-    public String getStudentFullNameByStudentId(UUID id) {
+    public static String getStudentFullNameByStudent(Student st) {
+
+//        UUID id = st.getId();
 
         String result = "\0";
 
-        if (this.id == id) {
-            result = this.lastName + " " + this.fisrtName + " " + this.middleName;
-        }
+//        if (this.id == id) {
+//            result = this.lastName + " " + this.fisrtName + " " + this.middleName;
+        result = st.getLastName() + " " + st.getFisrtName() + " " + st.getMiddleName();
+//        }
         return result;
     }
 
@@ -204,34 +206,79 @@ public class Student {
 
 
         if (this.arrayOfHt == null) {
-            this.arrayOfHt = new int[1][0];
+            this.arrayOfHt = new int[0][1];
         }
 
 
-        if (Arrays.binarySearch(this.arrayOfHt, numberHT) < 0) {
-
+        if (mySearchInArray(this.arrayOfHt, numberHT) < 0) {
 
             this.arrayOfHt = copyArr(this.arrayOfHt);
             this.arrayOfHt[(arrayOfHt.length - 1)][0] = numberHT;
-//            int[][] arrayOfHt2 = Arrays.copyOf(this.arrayOfHt, this.arrayOfHt.length + 1);
-//            arrayOfHt2[0][0] = numberHT;
 
         } else {
             System.out.println(" !!! HomeTask with number: " + numberHT + " has already added into to Student with Id" + this.getId() + " !!! ");
         }
     }
 
+    public static void listOfStudentTasks(Student st) {
+        String result = " Student " + getStudentFullNameByStudent(st) + " has next tasks:  {";
+
+        for (int i = 0; i < st.arrayOfHt.length; i++) {
+            if (i == st.arrayOfHt.length - 1) {
+                result += String.valueOf(st.arrayOfHt[i][0]);
+            } else {
+//                result += Arrays.toString(st.arrayOfHt[i]) + ";";
+                result += String.valueOf(st.arrayOfHt[i][0]) + ";";
+            }
+        }
+        result += "}";
+        System.out.println(result);
+    }
 
 
+    public static void listOfStudentTasksWithMarks(Student st) {
+        String result = " Student " + getStudentFullNameByStudent(st) + " has next tasks: ";
 
-    public static int[][] copyArr(final int[][] array) {
+        System.out.println(result);
+
+        for (int i = 0; i < st.arrayOfHt.length; i++) {
+
+            result = "{ Number of task: " + st.arrayOfHt[i][0] + " Mark of the task: " + st.arrayOfHt[i][1] + " }";
+            ;
+
+            System.out.println(result);
+        }
+    }
+
+    //public getTaskMark
+    public static void setTaskMarkToStudentByNumberTask(Student st, int numberTask, int mark) {
+        int position = -1;
+
+        for (int i = 0; i < st.arrayOfHt.length; i++) {
+            if (st.arrayOfHt[i][0] == numberTask) {
+                position = i;
+                break;
+            }
+        }
+
+        if (position > -1) {
+            st.arrayOfHt[position][1] = mark;
+            System.out.println("Indicated task: " + numberTask + " has been added to student " + getStudentFullNameByStudent(st) );
+        } else {
+            System.out.println("Student " + getStudentFullNameByStudent(st) + " does not have indicated task: " + numberTask);
+            return;
+        }
+
+    }
+
+    public static int[][] copyArr(final int[][] array) { //copy previous state of 2 dimension array with increasing of array's lenght (row and column) on 1
         if (array != null) {
-            final int[][] copy = new int[array.length + 1 ][];
+            final int[][] copy = new int[array.length + 1][array.length + 1]; // increasing of array's lenght (row and column) on 1
 
             for (int i = 0; i < array.length; i++) {
                 final int[] row = array[i];
 
-                copy[i] = new int[row.length];
+                copy[i] = new int[row.length + 1];
                 System.arraycopy(row, 0, copy[i], 0, row.length);
             }
 
@@ -239,5 +286,20 @@ public class Student {
         }
 
         return null;
+    }
+
+    public static int mySearchInArray(int[][] array, int searchKey) { // search only by rows
+
+        int position = -1;
+
+        for (int i = 0; i < array.length; i++) {
+
+            if (array[i][0] == searchKey) {
+                position = i;
+                break;
+            }
+
+        }
+        return position;
     }
 }

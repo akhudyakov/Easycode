@@ -11,11 +11,17 @@ public class HomeTask {
     private int numberOfHt;
     private String headerOfHt;
     private String textOfHt;
+    private static int count;
 
 
     public HomeTask(String subjectOfHt, String headerOfHt, String textOfHt) {
+        count ++;
+
         this.id = UUID.randomUUID();
-        numberOfHt++;
+        this.numberOfHt = count;
+        this.subjectOfHt = subjectOfHt;
+        this.headerOfHt = headerOfHt;
+        this.textOfHt = textOfHt;
     }
 
     public UUID getId() {
@@ -44,4 +50,7 @@ public class HomeTask {
                 "; the header is: " + getHeaderOfHt() + " and text is: " + getTextOfHt();
         return result;
     }
+
+
+
 }

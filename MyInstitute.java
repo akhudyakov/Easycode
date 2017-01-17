@@ -39,5 +39,23 @@ public class MyInstitute {
             System.out.println(newHomeTask1.toString());
             newStudent1.addHomeTaskToStudent(newHomeTask1);
 
+            HomeTask newHomeTask2 = new HomeTask("Subject2", "Header2", "Text2");
+            System.out.println(newHomeTask2.toString());
+            newStudent2.addHomeTaskToStudent(newHomeTask2);
+
+            HomeTask newHomeTask3 = new HomeTask("Subject3", "Header3", "Text3");
+            System.out.println(newHomeTask3.toString());
+            newStudent1.addHomeTaskToStudent(newHomeTask3);
+
+//            Student.listOfStudentTasks(newStudent1);
+            Student.setTaskMarkToStudentByNumberTask(newStudent1,2, 12);
+            Student.setTaskMarkToStudentByNumberTask(newStudent1,3, 6);
+            Student.listOfStudentTasksWithMarks(newStudent1);
+
+            Student.listOfStudentTasks(newStudent1);
+            Student.listOfStudentTasks(newStudent2);
+
+
+
         }
 }

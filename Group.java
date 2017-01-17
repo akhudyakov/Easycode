@@ -114,9 +114,13 @@ public class Group {
     public void listOfStudentsInTheGroup() {
         String result = "{";
         for (int i = 0; i < this.arrayWithIdOfStudents.length; i++) {
-            result += this.arrayWithIdOfStudents[i] + ";";
+            if ( i == this.arrayWithIdOfStudents.length - 1) {
+                result += this.arrayWithIdOfStudents[i];
+            } else {
+                result += this.arrayWithIdOfStudents[i] + ";";
+            }
         }
-        result += "]";
+        result += "}";
         System.out.print(result);
     }
 
