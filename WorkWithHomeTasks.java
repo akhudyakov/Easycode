@@ -5,8 +5,8 @@ package HomeTask4_classes;
  */
 public class WorkWithHomeTasks {
 
-    public static int getAverageMarkByStudent(Student st) {
-        int averageMark = 0; // initial value of average of mark
+    public static double getAverageMarkByStudent(Student st) {
+        double averageMark = 0; // initial value of average of mark
         int count = 0; // number of marks which are set
         int[][] array = Student.getListOfStudentTasksWithMarks(st);
 

@@ -18,7 +18,7 @@ public class HomeTask {
 
 
     public HomeTask(String subjectOfHt, String headerOfHt, String textOfHt) {
-        count ++;
+        count++;
 
         this.id = UUID.randomUUID();
         this.numberOfHt = count;
@@ -47,9 +47,13 @@ public class HomeTask {
         return textOfHt;
     }
 
-    public static int getMinMark() {        return minMark;    }
+    public static int getMinMark() {
+        return minMark;
+    }
 
-    public static int getMaxMark() {        return maxMark;    }
+    public static int getMaxMark() {
+        return maxMark;
+    }
 
     public String toString() {
         String result = "Home task with ID: " + getId() + " and its number: " + getNumberOfHt() + " has the  Subject: " + getSubjectOfHt() +
@@ -57,6 +61,20 @@ public class HomeTask {
         return result;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == null) return false;
+        if (this instanceof Object) return true;
+        if (this.getClass() != o.getClass()) return false;
+        if (this.hashCode() != o.hashCode()) return false;
 
+        HomeTask ht = (HomeTask) o;
+        if (this.id != ht.id) return false;
+        if (this.subjectOfHt != ht.subjectOfHt) return false;
+        if (this.headerOfHt != ht.headerOfHt) return false;
+        if (this.textOfHt != ht.textOfHt) return false;
+        if (this.numberOfHt != ht.numberOfHt) return false;
 
+        return true;
+    }
 }
