@@ -1,7 +1,6 @@
 package HomeTask4_classes;
 
 import java.util.Arrays;
-import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -10,7 +9,8 @@ import java.util.UUID;
 public class Group {
 
     private UUID idGroup;
-    private UUID[] arrayWithIdOfStudents;
+    //    private UUID[] arrayWithStudents;
+    private Student[] arrayWithStudents;
     private UUID leader;
     private int numberOfFaculty; // number of current faculty
     private int numberOfCourse; // number of current course
@@ -25,8 +25,6 @@ public class Group {
 
         this.idGroup = UUID.randomUUID();
         this.groupName = String.valueOf(numberOfFaculty) + String.valueOf(numberOfCourse) + groupNumber;
-
-//        this.arrayWithIdOfStudents = new UUID[0];
     }
 
     public UUID getIdGroup() {
@@ -39,6 +37,10 @@ public class Group {
             count = countOfGroupMembers;
         }
         return count;
+    }
+
+    public int getCountOfGroupMembers() {
+        return countOfGroupMembers;
     }
 
     public int getNumberOfFaculty() {
@@ -59,9 +61,11 @@ public class Group {
     }
 
 
-    public UUID getIdOfStudent(int index) {
-        return arrayWithIdOfStudents[index];
+
+    public Student getStudentNumber(int index) {
+        return arrayWithStudents[index];
     }
+
 
     public String getGroupNumber() {
         return groupNumber;
@@ -84,7 +88,7 @@ public class Group {
     }
 
 
-    @Override // set  by myself
+    @Override
     public String toString() {
 
         String result = "Group ID = " + getIdGroup() + "; Group Name = " + getGroupName();
@@ -101,9 +105,9 @@ public class Group {
         Group gr = (Group) o;
         if (this.idGroup != gr.idGroup) return false;
         if (this.groupName == null) return gr.groupName == null;
-        if (this.arrayWithIdOfStudents == null) return gr.arrayWithIdOfStudents==null;
-        if (this.arrayWithIdOfStudents != gr.arrayWithIdOfStudents) return false;
-        if (this.leader == null) return gr.leader==null;
+        if (this.arrayWithStudents == null) return gr.arrayWithStudents == null;
+        if (this.arrayWithStudents != gr.arrayWithStudents) return false;
+        if (this.leader == null) return gr.leader == null;
         if (this.leader != gr.leader) return false;
         if (this.countOfGroupMembers != gr.countOfGroupMembers) return false;
 
@@ -111,13 +115,13 @@ public class Group {
     }
 
 
-    public void listOfStudentsInTheGroup() {
+    public void printListOfStudentsInTheGroup() {
         String result = "{";
-        for (int i = 0; i < this.arrayWithIdOfStudents.length; i++) {
-            if ( i == this.arrayWithIdOfStudents.length - 1) {
-                result += this.arrayWithIdOfStudents[i];
+        for (int i = 0; i < this.arrayWithStudents.length; i++) {
+            if (i == this.arrayWithStudents.length - 1) {
+                result += this.arrayWithStudents[i];
             } else {
-                result += this.arrayWithIdOfStudents[i] + ";";
+                result += this.arrayWithStudents[i] + ";";
             }
         }
         result += "}";
@@ -125,35 +129,42 @@ public class Group {
     }
 
 
+
+    public static Student[] getArrayOfStudentsNumbersInTheGroup(Group g) {
+        return g.arrayWithStudents;
+    }
+
+
     //    public int addStudentToGroup(UUID idGr, UUID idStudent) {
-    public int addStudentToGroup(UUID idGr, Student st) {
-
-        UUID idStudent = st.getId();
-
-        if (this.idGroup == idGr) {
-
-            // what is better: creating array in constructor or here ?
-            //if it is here I can check: "is array null" for equals
-            if (this.arrayWithIdOfStudents == null) {
-                this.arrayWithIdOfStudents = new UUID[0];
-            }
+    public int addStudentToGroup(Student st) {
 
 
-            if (Arrays.binarySearch(this.arrayWithIdOfStudents, idStudent) < 0 & this.countOfGroupMembers < st.getMaxCourses()) {
+
+        // what is better: creating array in constructor or here ?
+        //if it is here I can check: "is array null" for equals
+        if (this.arrayWithStudents == null) {
+            this.arrayWithStudents = new Student[0];
+        }
 
 
-                this.countOfGroupMembers++;
-                this.arrayWithIdOfStudents = Arrays.copyOf(this.arrayWithIdOfStudents, this.countOfGroupMembers);
-                this.arrayWithIdOfStudents[this.countOfGroupMembers - 1] = idStudent;
+//        if (Arrays.binarySearch(this.arrayWithStudents, st) < 0 & this.countOfGroupMembers < st.getMaxCourses()) {
+//        I commented out row which is above because of: java.lang.ClassCastException: HomeTask4_classes.Student cannot be cast to java.lang.Comparable   Why? they have the same type Student
+//        and I cannot create array with only unique Students
+        if (this.countOfGroupMembers < st.getMaxCourses()) {
 
 
-            } else {
-                System.out.println(" !!! Student with Name: " + getStudentFullNameByStudent(st) + " and with ID: " + idStudent + " has already included into Group with Id" + idGr + " !!! ");
-            }
+            this.countOfGroupMembers++;
+            this.arrayWithStudents = Arrays.copyOf(this.arrayWithStudents, this.countOfGroupMembers);
+            this.arrayWithStudents[this.countOfGroupMembers - 1] = st;
+
 
         } else {
-            System.out.println("!!!  Inputted parameter Id of Group is incorrect  !!!");
+            System.out.println(" !!! Student with Name: " + getStudentFullNameByStudent(st) + " and with Student's Number: " + st.getNumberStudent() + " has already included into Group with Id" + getIdGroup() + " !!! ");
         }
+
+//        } else {
+//            System.out.println("!!!  Inputted parameter Id of Group is incorrect  !!!");
+//        }
         return countOfGroupMembers;
     }
 

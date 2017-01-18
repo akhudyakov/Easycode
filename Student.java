@@ -11,6 +11,7 @@ import java.util.UUID;
 public class Student {
 
     private UUID id;
+    private int numberStudent;
     private String lastName;
     private String fisrtName;
     private String middleName;
@@ -20,6 +21,7 @@ public class Student {
     private String documentType;
     private String documentNumber;
     private int[][] arrayOfHt;
+    private static int countOfStudents; // number of students in the group
  /*   private int numberOfFaculty;
     private int numberOfCource;
     private String groupNumber; */
@@ -28,8 +30,10 @@ public class Student {
     private final int incrementOfCourse = 1;
 
     public Student(String lastName, String fisrtName, String middleName, Date birthDate, String docType, String docNumber) {
-        this.id = UUID.randomUUID();
+        countOfStudents ++;
 
+        this.id = UUID.randomUUID();
+        this.numberStudent = countOfStudents;
         this.fisrtName = fisrtName;
         this.lastName = lastName;
         this.middleName = middleName;
@@ -76,19 +80,8 @@ public class Student {
         return documentNumber;
     }
 
+    public int getNumberStudent() {        return numberStudent;    }
 
-
-    /*public int getNumberOfFaculty() {
-        return numberOfFaculty;
-    }
-
-    public int getNumberOfCource() {
-        return numberOfCource;
-    }
-
-    public String getGroupNumber() {
-        return groupNumber;
-    }*/
 
     public int getMaxCourses() {
         return maxCourses;
@@ -106,37 +99,27 @@ public class Student {
         this.email = email;
     }
 
-    /*public void setNumberOfFaculty(int numberOfFaculty) {
-        this.numberOfFaculty = numberOfFaculty;
-    }
-
-    public void setNumberOfCource(int numberOfCource) {
-        this.numberOfCource = numberOfCource;
-    }
-
-    public void setGroupNumber(String groupNumber) {
-        this.groupNumber = groupNumber;
-    }
 
 
-    // transfer a student to next cource
-    public void transferToNextCourse() {
-
-        if (numberOfCource + incrementOfCourse <= maxCource) {
-            numberOfCource += incrementOfCourse;
-        }
-
-    } */
+//    // transfer a student to next cource
+//    public void transferToNextCourse() {
+//
+//        if (numberOfCource + incrementOfCourse <= maxCource) {
+//            numberOfCource += incrementOfCourse;
+//        }
+//
+//    }
 
     @Override
     public String toString() {
 
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");  //("yyyy-MM-dd");
 
-        String result = "student ID = " + getId() + "; Last Name = " + getLastName() + "; First Name = " + getFisrtName() +
-                "; Middle Name = " + getMiddleName() + "; Birthdate = " + formatter.format(getBirthDate()) + "; Document =  "
-                + getDocumentType() + "; Serie = " + getDocumentNumber() + "; Email = " + getEmail() +
-                "; Phone number = " + getPhoneNumber();// + "; Faculty = " + getNumberOfFaculty();
+        String result = "Student with number: " +  getNumberStudent() + "; Last Name = " + getLastName() + "; First Name = " + getFisrtName() +
+                "; Middle Name = " + getMiddleName();
+//                + "; Birthdate = " + formatter.format(getBirthDate()) + "; Document =  "
+//                + getDocumentType() + "; Serie = " + getDocumentNumber() + "; Email = " + getEmail() +
+//                "; Phone number = " + getPhoneNumber() +  "; ID = " + getId();
 
         return result;
     }
@@ -162,10 +145,6 @@ public class Student {
         if (this.email != s.email) return false;
         if (this.phoneNumber == null) return s.phoneNumber == null;
         if (this.phoneNumber != s.phoneNumber) return false;
-        /*if (this.numberOfFaculty != s.numberOfFaculty) return false;
-        if (this.numberOfCource != s.numberOfCource) return false;
-        if (this.groupNumber == null) return s.groupNumber==null;
-        if (this.groupNumber != s.groupNumber) return false; */
 
         return true;
     }
@@ -181,22 +160,13 @@ public class Student {
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + documentType.hashCode();
         result = 31 * result + documentNumber.hashCode();
-        /*result = 31 * result + numberOfFaculty;
-        result = 31 * result + numberOfCource;
-        result = 31 * result + (groupNumber != null ? groupNumber.hashCode() : 0); */
         return result;
     }
 
     public static String getStudentFullNameByStudent(Student st) {
 
-//        UUID id = st.getId();
+        String result = st.getLastName() + " " + st.getFisrtName() + " " + st.getMiddleName();
 
-        String result = "\0";
-
-//        if (this.id == id) {
-//            result = this.lastName + " " + this.fisrtName + " " + this.middleName;
-        result = st.getLastName() + " " + st.getFisrtName() + " " + st.getMiddleName();
-//        }
         return result;
     }
 
@@ -207,7 +177,6 @@ public class Student {
 
 
         if (this.arrayOfHt == null) {
-//            this.arrayOfHt = new int[0][1];
             this.arrayOfHt = new int[1][2];
             this.arrayOfHt[(arrayOfHt.length - 1)][0] = numberHT;
         } else {
@@ -217,8 +186,8 @@ public class Student {
 
                 this.arrayOfHt = copyTwoDimArrayWithAddingLenght(this.arrayOfHt);
                 this.arrayOfHt[(arrayOfHt.length - 1)][0] = numberHT;
-//            this.arrayOfHt[(arrayOfHt.length - 1)][0] = numberHT;
-                System.out.println("Task" + Arrays.deepToString(this.arrayOfHt));
+
+//                System.out.println("Task" + Arrays.deepToString(this.arrayOfHt));
 
             } else {
                 System.out.println(" !!! HomeTask with number: " + numberHT + " has already added into to Student with Id" + this.getId() + " !!! ");
