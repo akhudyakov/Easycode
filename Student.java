@@ -1,6 +1,7 @@
 package HomeTask4_classes;
 
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.UUID;
 
@@ -18,11 +19,12 @@ public class Student {
     private String email;
     private String documentType;
     private String documentNumber;
+    private int[][] arrayOfHt;
  /*   private int numberOfFaculty;
     private int numberOfCource;
     private String groupNumber; */
 
-    private int maxCource = 6;
+    private final int maxCourses = 6; // max number of courses
     private final int incrementOfCourse = 1;
 
     public Student(String lastName, String fisrtName, String middleName, Date birthDate, String docType, String docNumber) {
@@ -74,6 +76,8 @@ public class Student {
         return documentNumber;
     }
 
+
+
     /*public int getNumberOfFaculty() {
         return numberOfFaculty;
     }
@@ -86,8 +90,8 @@ public class Student {
         return groupNumber;
     }*/
 
-    public int getMaxCource() {
-        return maxCource;
+    public int getMaxCourses() {
+        return maxCourses;
     }
 
     public int getIncrementOfCource() {
@@ -124,7 +128,7 @@ public class Student {
 
     } */
 
-    @Override // set  by myself
+    @Override
     public String toString() {
 
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");  //("yyyy-MM-dd");
@@ -150,7 +154,7 @@ public class Student {
         if (this.id != s.id) return false;
         if (this.fisrtName != s.fisrtName) return false;
         if (this.lastName != s.lastName) return false;
-        if (this. middleName != s.middleName) return false;
+        if (this.middleName != s.middleName) return false;
         if (this.birthDate != s.birthDate) return false;
         if (this.documentType != s.documentType) return false;
         if (this.documentNumber != s.documentNumber) return false;
@@ -181,5 +185,137 @@ public class Student {
         result = 31 * result + numberOfCource;
         result = 31 * result + (groupNumber != null ? groupNumber.hashCode() : 0); */
         return result;
+    }
+
+    public static String getStudentFullNameByStudent(Student st) {
+
+//        UUID id = st.getId();
+
+        String result = "\0";
+
+//        if (this.id == id) {
+//            result = this.lastName + " " + this.fisrtName + " " + this.middleName;
+        result = st.getLastName() + " " + st.getFisrtName() + " " + st.getMiddleName();
+//        }
+        return result;
+    }
+
+
+    public void addHomeTaskToStudent(HomeTask ht) {
+
+        int numberHT = ht.getNumberOfHt();
+
+
+        if (this.arrayOfHt == null) {
+//            this.arrayOfHt = new int[0][1];
+            this.arrayOfHt = new int[1][2];
+            this.arrayOfHt[(arrayOfHt.length - 1)][0] = numberHT;
+        } else {
+
+
+            if (mySearchInArray(this.arrayOfHt, numberHT) < 0) {
+
+                this.arrayOfHt = copyTwoDimArrayWithAddingLenght(this.arrayOfHt);
+                this.arrayOfHt[(arrayOfHt.length - 1)][0] = numberHT;
+//            this.arrayOfHt[(arrayOfHt.length - 1)][0] = numberHT;
+                System.out.println("Task" + Arrays.deepToString(this.arrayOfHt));
+
+            } else {
+                System.out.println(" !!! HomeTask with number: " + numberHT + " has already added into to Student with Id" + this.getId() + " !!! ");
+            }
+        }
+    }
+
+    public static void listOfStudentTasks(Student st) {
+        String result = " Student " + getStudentFullNameByStudent(st) + " has next tasks:  {";
+
+        for (int i = 0; i < st.arrayOfHt.length; i++) {
+            if (i == st.arrayOfHt.length - 1) {
+                result += String.valueOf(st.arrayOfHt[i][0]);
+            } else {
+                result += String.valueOf(st.arrayOfHt[i][0]) + ";";
+            }
+        }
+        result += "}";
+        System.out.println(result);
+    }
+
+
+    public static void printListOfStudentTasksWithMarks(Student st) {
+        String result = " Student " + getStudentFullNameByStudent(st) + " has next tasks with marks (if mark = 0 - it means that mark is not set) : ";
+
+        System.out.println(result);
+
+        for (int i = 0; i < st.arrayOfHt.length; i++) {
+
+            result = "{ Number of task: " + st.arrayOfHt[i][0] + "; Mark of the task: " + st.arrayOfHt[i][1] + " }";
+
+
+            System.out.println(result);
+        }
+    }
+
+
+    public static int[][] getListOfStudentTasksWithMarks(Student st) {
+
+        int[][] result = st.arrayOfHt;
+        return result;
+    }
+
+    public static void setTaskMarkToStudentByNumberTask(Student st, int numberTask, int mark) {
+        int position = -1;
+
+        if (mark >= HomeTask.getMinMark() & mark <= HomeTask.getMaxMark()) {
+
+            for (int i = 0; i < st.arrayOfHt.length; i++) {
+                if (st.arrayOfHt[i][0] == numberTask) {
+                    position = i;
+                    break;
+                }
+            }
+
+            if (position > -1) {
+                st.arrayOfHt[position][1] = mark;
+                System.out.println("Indicated task: \"" + numberTask + "\" has been added to student " + getStudentFullNameByStudent(st));
+            } else {
+                System.out.println("Student " + getStudentFullNameByStudent(st) + " does not have indicated task: " + numberTask);
+                return;
+            }
+        } else {
+            System.out.println("You inputted incorrect mark: " + mark);
+        }
+
+    }
+
+    public static int[][] copyTwoDimArrayWithAddingLenght(final int[][] array) { //copy previous state of 2 dimension array with increasing of array's lenght (row and column) on 1
+        if (array != null) {
+            final int[][] copy = new int[array.length + 1][2]; // increasing of array's length for row on 1
+
+            for (int i = 0; i < array.length; i++) {
+                final int[] row = array[i];
+
+                copy[i] = new int[row.length];
+                System.arraycopy(row, 0, copy[i], 0, row.length);
+            }
+
+            return copy;
+        }
+
+        return null;
+    }
+
+    public static int mySearchInArray(int[][] array, int searchKey) { // search only by rows
+
+        int position = -1;
+
+        for (int i = 0; i < array.length; i++) {
+
+            if (array[i][0] == searchKey) {
+                position = i;
+                break;
+            }
+
+        }
+        return position;
     }
 }
