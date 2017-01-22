@@ -79,7 +79,7 @@ public class Student extends Human {
     @Override
     public boolean equals(Object o) {
         if (o == null) return false;
-        if (this instanceof Object) return true;
+        if (!(this instanceof Object)) return false;
         if (this.getClass() != o.getClass()) return false;
         if (this.hashCode() != o.hashCode()) return false;
 
@@ -237,5 +237,10 @@ public class Student extends Human {
 
         }
         return position;
+    }
+
+    @Override
+    public Student[] leaveInstitute() {
+        return new Student[0];
     }
 }

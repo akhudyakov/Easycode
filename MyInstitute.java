@@ -101,5 +101,11 @@ public class MyInstitute {
 
         Teacher Teacher1 = new Teacher("Prepod1", "Petr", "Sergeevich", Date.valueOf("1965-10-23"), "passport", "MC523784");
         Teacher Teacher2 = new Teacher("Prepod2", "Alex", "Artemovich", Date.valueOf("1965-05-22"), "passport", "MB823712");
+        Teacher Teacher3 = new Teacher("Prepod3", "Andrey", "Igorevich", Date.valueOf("1952-02-22"), "passport", "MB333754");
+        Teacher Teacher4 = new Teacher("Prepod4", "Andrey", "Evgenievich", Date.valueOf("1942-06-23"), "passport", "MH712547");
+
+        System.out.println(Arrays.deepToString(Teacher.getArrayOfTeacher()));
+        Teacher3.leaveInstitute();
+        System.out.println(Arrays.deepToString(Teacher.getArrayOfTeacher()));
     }
 }

@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * Created by adminnt on 22.01.17.
  */
-public abstract class Human {
+public abstract class Human implements LeaveTheInstitute {
     private String lastName;
     private String fisrtName;
     private String middleName;
@@ -66,6 +66,7 @@ public abstract class Human {
     public void setEmail(String email) {
         this.email = email;
     }
+
 }
 
 

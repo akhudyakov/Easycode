@@ -100,7 +100,7 @@ public class Group {
 
     public boolean equals(Object o) {
         if (o == null) return false;
-        if (this instanceof Object) return true;
+        if (!(this instanceof Object)) return false;
         if (this.getClass() != o.getClass()) return false;
         if (this.hashCode() != o.hashCode()) return false;
 
