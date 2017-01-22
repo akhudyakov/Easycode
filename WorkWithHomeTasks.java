@@ -1,4 +1,4 @@
-package HomeTask4_classes;
+package HomeTaskInstitute;
 
 
 import java.util.Arrays;

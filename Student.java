@@ -1,45 +1,33 @@
-package HomeTask4_classes;
+package HomeTaskInstitute;
 
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.UUID;
 
 /**
  * Created by adminnt on 15.01.17.
  */
-public class Student {
+public class Student extends Human {
 
     private UUID id;
     private int numberStudent;
-    private String lastName;
-    private String fisrtName;
-    private String middleName;
-    private Date birthDate;
-    private String phoneNumber;
-    private String email;
-    private String documentType;
-    private String documentNumber;
+
+
     private int[][] arrayOfHt;
     private static int countOfStudents; // number of students in the group
- /*   private int numberOfFaculty;
-    private int numberOfCource;
-    private String groupNumber; */
 
-    private final int maxCourses = 6; // max number of courses
+
+//    private final int maxCourses = 6; // max number of courses
     private final int incrementOfCourse = 1;
 
     public Student(String lastName, String fisrtName, String middleName, Date birthDate, String docType, String docNumber) {
+        super(lastName, fisrtName, middleName, birthDate, docType, docNumber);
         countOfStudents ++;
+
 
         this.id = UUID.randomUUID();
         this.numberStudent = countOfStudents;
-        this.fisrtName = fisrtName;
-        this.lastName = lastName;
-        this.middleName = middleName;
-        this.birthDate = birthDate;
-        this.documentType = docType;
-        this.documentNumber = docNumber;
+
 
     }
 
@@ -48,56 +36,19 @@ public class Student {
         return id;
     }
 
-    public String getFisrtName() {
-        return fisrtName;
-    }
 
-    public String getLastName() {
-        return lastName;
-    }
-
-    public String getMiddleName() {
-        return middleName;
-    }
-
-    public Date getBirthDate() {
-        return birthDate;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getDocumentType() {
-        return documentType;
-    }
-
-    public String getDocumentNumber() {
-        return documentNumber;
-    }
 
     public int getNumberStudent() {        return numberStudent;    }
 
 
-    public int getMaxCourses() {
-        return maxCourses;
-    }
+//    public int getMaxCourses() {
+//        return maxCourses;
+//    }
 
     public int getIncrementOfCource() {
         return incrementOfCourse;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
 
 
@@ -135,16 +86,16 @@ public class Student {
 
         Student s = (Student) o;
         if (this.id != s.id) return false;
-        if (this.fisrtName != s.fisrtName) return false;
-        if (this.lastName != s.lastName) return false;
-        if (this.middleName != s.middleName) return false;
-        if (this.birthDate != s.birthDate) return false;
-        if (this.documentType != s.documentType) return false;
-        if (this.documentNumber != s.documentNumber) return false;
-        if (this.email == null) return s.email == null;
-        if (this.email != s.email) return false;
-        if (this.phoneNumber == null) return s.phoneNumber == null;
-        if (this.phoneNumber != s.phoneNumber) return false;
+        if (this.getFisrtName() != s.getFisrtName()) return false;
+        if (this.getLastName() != s.getLastName()) return false;
+        if (this.getMiddleName() != s.getMiddleName()) return false;
+        if (this.getBirthDate() != s.getBirthDate()) return false;
+        if (this.getDocumentType() != s.getDocumentType()) return false;
+        if (this.getDocumentNumber() != s.getDocumentNumber()) return false;
+        if (this.getEmail() == null) return s.getEmail() == null;
+        if (this.getEmail() != s.getEmail()) return false;
+        if (this.getPhoneNumber() == null) return s.getPhoneNumber() == null;
+        if (this.getPhoneNumber() != s.getPhoneNumber()) return false;
 
         return true;
     }
@@ -152,14 +103,14 @@ public class Student {
     @Override
     public int hashCode() {
         int result = id.hashCode();
-        result = 31 * result + lastName.hashCode();
-        result = 31 * result + fisrtName.hashCode();
-        result = 31 * result + middleName.hashCode();
-        result = 31 * result + birthDate.hashCode();
-        result = 31 * result + phoneNumber.hashCode();
-        result = 31 * result + (email != null ? email.hashCode() : 0);
-        result = 31 * result + documentType.hashCode();
-        result = 31 * result + documentNumber.hashCode();
+        result = 31 * result + getLastName().hashCode();
+        result = 31 * result + getFisrtName().hashCode();
+        result = 31 * result + getMiddleName().hashCode();
+        result = 31 * result + getBirthDate().hashCode();
+        result = 31 * result + getPhoneNumber().hashCode();
+        result = 31 * result + (getEmail() != null ? getEmail().hashCode() : 0);
+        result = 31 * result + getDocumentType().hashCode();
+        result = 31 * result + getDocumentNumber().hashCode();
         return result;
     }
 

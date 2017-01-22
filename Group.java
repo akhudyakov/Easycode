@@ -1,4 +1,4 @@
-package HomeTask4_classes;
+package HomeTaskInstitute;
 
 import java.util.Arrays;
 import java.util.UUID;
@@ -60,7 +60,9 @@ public class Group {
         this.numberOfCourse = numberOfCourse;
     }
 
-
+    public int getMaxNumberStudentsInGroup() {
+        return maxNumberStudentsInGroup;
+    }
 
     public Student getStudentNumber(int index) {
         return arrayWithStudents[index];
@@ -148,9 +150,9 @@ public class Group {
 
 
 //        if (Arrays.binarySearch(this.arrayWithStudents, st) < 0 & this.countOfGroupMembers < st.getMaxCourses()) {
-//        I commented out row which is above because of: java.lang.ClassCastException: HomeTask4_classes.Student cannot be cast to java.lang.Comparable   Why? they have the same type Student
+//        I commented out row which is above because of: java.lang.ClassCastException: HomeTaskInstitute.Student cannot be cast to java.lang.Comparable   Why? they have the same type Student
 //        and I cannot create array with only unique Students
-        if (this.countOfGroupMembers < st.getMaxCourses()) {
+        if (this.countOfGroupMembers < getMaxNumberStudentsInGroup()) {
 
 
             this.countOfGroupMembers++;

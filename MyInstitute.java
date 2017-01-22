@@ -1,4 +1,4 @@
-package HomeTask4_classes;
+package HomeTaskInstitute;
 
 import java.sql.Date;
 import java.util.Arrays;
@@ -98,5 +98,8 @@ public class MyInstitute {
         Student [] arrayAfterRecursion = WorkWithHomeTasks.GetStudentArrayWithMarkMoreThanValue(empty, Group.getArrayOfStudentsNumbersInTheGroup(newGroup1), 9);
         System.out.println("\n Result of factorial's work");
         System.out.println(Arrays.toString(arrayAfterRecursion));
+
+        Teacher Teacher1 = new Teacher("Prepod1", "Petr", "Sergeevich", Date.valueOf("1965-10-23"), "passport", "MC523784");
+        Teacher Teacher2 = new Teacher("Prepod2", "Alex", "Artemovich", Date.valueOf("1965-05-22"), "passport", "MB823712");
     }
 }
