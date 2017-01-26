@@ -12,27 +12,27 @@ public class Teacher extends Human {
 
 
     private UUID id;
-    private static Teacher[] arrayOfTeacher;
+    private static Teacher[] arrayOfAllTeachers;
     private static int countOfTeachers; // number of teachers
 
     static {
-        arrayOfTeacher = new Teacher[0];
+        arrayOfAllTeachers = new Teacher[0];
     }
 
 
     public Teacher(String lastName, String fisrtName, String middleName, Date birthDate, String docType, String docNumber) {
         super(lastName, fisrtName, middleName, birthDate, docType, docNumber);
         countOfTeachers++;
-        arrayOfTeacher = Arrays.copyOf(arrayOfTeacher, countOfTeachers);
+        arrayOfAllTeachers = Arrays.copyOf(arrayOfAllTeachers, countOfTeachers);
 
         this.id = UUID.randomUUID();
-        arrayOfTeacher[countOfTeachers - 1] = this;
+        arrayOfAllTeachers[countOfTeachers - 1] = this;
     }
 
 
-    public static Teacher[] getArrayOfTeacher() {
-        return Arrays.copyOf(arrayOfTeacher, arrayOfTeacher.length);
-//        return arrayOfTeacher;
+    public static Teacher[] getArrayOfAllTeachers() {
+        return Arrays.copyOf(arrayOfAllTeachers, arrayOfAllTeachers.length);
+//        return arrayOfAllTeachers;
     }
 
     public UUID getId() {
@@ -63,33 +63,33 @@ public class Teacher extends Human {
     public String toString() {
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");  //("yyyy-MM-dd");
 
-//        String result = "Student with ID: " + getId() + "; Last Name = " + getLastName() + "; First Name = " + getFisrtName() +
+//        String result = "Teacher with ID: " + getId() + "; Last Name = " + getLastName() + "; First Name = " + getFisrtName() +
 //                "; Middle Name = " + getMiddleName();
-        String result = "Student with  Last Name = " + getLastName();
+        String result = "Teacher with  Last Name = " + getLastName();
         return result;
     }
 
 
     @Override
     public Teacher[] leaveInstitute() {
-        //Teacher[] arrOfTeachers = getArrayOfTeacher();
+        //Teacher[] arrOfTeachers = getArrayOfAllTeachers();
         int position = -1;
 
-        for (int i = 0; i < arrayOfTeacher.length; i++) {
-            if (arrayOfTeacher[i].equals(this)) {
+        for (int i = 0; i < arrayOfAllTeachers.length; i++) {
+            if (arrayOfAllTeachers[i].equals(this)) {
                 position = i;
                 break;
             }
         }
 
-        for (int j = position; j < arrayOfTeacher.length; j++) {
-            if (j < arrayOfTeacher.length - 1) {
-                arrayOfTeacher[j] = arrayOfTeacher[j + 1];
+        for (int j = position; j < arrayOfAllTeachers.length; j++) {
+            if (j < arrayOfAllTeachers.length - 1) {
+                arrayOfAllTeachers[j] = arrayOfAllTeachers[j + 1];
             } else {
-                arrayOfTeacher = Arrays.copyOf(arrayOfTeacher, arrayOfTeacher.length - 1);
+                arrayOfAllTeachers = Arrays.copyOf(arrayOfAllTeachers, arrayOfAllTeachers.length - 1);
                 break;
             }
         }
-        return arrayOfTeacher;
+        return arrayOfAllTeachers;
     }
 }

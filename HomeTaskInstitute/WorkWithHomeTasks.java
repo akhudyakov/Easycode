@@ -12,13 +12,18 @@ public class WorkWithHomeTasks {
     public static double getAverageMarkByStudent(Student st) {
         double averageMark = 0; // initial value of average of mark
         int count = 0; // number of marks which are set
-        int[][] array = Student.getListOfStudentTasksWithMarks(st);
+        HomeTask[] arrHT = st.getArrayOfHt();
 
-        for (int i = 0; i < array.length; i++) {
+        HomeTask tempTask;
+        int mark;
+
+        for (int i = 0; i < arrHT.length; i++) {
 //            for (int j = 0; j < array[i].length ; j++) {
-            if (array[i][1] >=  2) { //if mark is set it meas that mark is in range 2 - 12
+            tempTask = arrHT[i]; //each task for the student
+            mark = tempTask.getMark(); // mark for specific task
+            if (mark >=  2) { //if mark is set it meas that mark is in range 2 - 12
                 count++;
-                averageMark += array[i][1]; // general sum (not average))
+                averageMark += mark; // general sum (not average))
             }
 
         }
@@ -38,7 +43,7 @@ public class WorkWithHomeTasks {
 
         Student studentTemp;
 
-        Student[] arrayStudentInGroup = Group.getArrayOfStudentsNumbersInTheGroup(gr);
+        Student[] arrayStudentInGroup = Group.getArrayOfStudentsInTheGroup(gr);
         for (int i = 0; i < arrayStudentInGroup.length; i++) {
             studentTemp = arrayStudentInGroup[i];
             averageMark = getAverageMarkByStudent(studentTemp);
@@ -59,7 +64,7 @@ public class WorkWithHomeTasks {
 
         Student studentTemp;
 
-        Student[] arrayStudentInGroup = Group.getArrayOfStudentsNumbersInTheGroup(gr);
+        Student[] arrayStudentInGroup = Group.getArrayOfStudentsInTheGroup(gr);
         for (int i = 0; i < arrayStudentInGroup.length; i++) {
             studentTemp = arrayStudentInGroup[i];
             averageMark = getAverageMarkByStudent(studentTemp);

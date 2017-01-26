@@ -17,22 +17,20 @@ public class MyInstitute {
 
         Student newStudent2 = new Student("Petrov", "Andriy", "Igorevich", Date.valueOf("1985-09-19"), "passport", "MH987654");
         Student newStudent3 = new Student("Sidorov", "Ivan", "Nikolaevich", Date.valueOf("1995-06-21"), "passport", "MC761254");
-
+        Student newStudent4 = new Student("Aronov", "Nikolay", "Semenovich", Date.valueOf("2001-01-11"), "passport", "ME51298");
 
         Group newGroup1 = new Group(1, 3, "7");
+        Group newGroup2 = new Group(1, 3, "8");
 
         newGroup1.addStudentToGroup(newStudent1);
-
-
-
 //      newGroup1.addStudentToGroup(newStudent1); // negative. add existed Student 1
         newGroup1.addStudentToGroup(newStudent2); // positive. add second student
-
         newGroup1.addStudentToGroup(newStudent3);
 
-
+        newGroup2.addStudentToGroup(newStudent4);
 
 //        newGroup1.printListOfStudentsInTheGroup();
+//        newGroup2.printListOfStudentsInTheGroup();
 
 
         HomeTask newHomeTask1 = new HomeTask("Subject1", "Header1", "Text1");
@@ -47,14 +45,15 @@ public class MyInstitute {
 
         newStudent1.addHomeTaskToStudent(newHomeTask3);
 
-        Student.setTaskMarkToStudentByNumberTask(newStudent1, 1, 12);
-        Student.setTaskMarkToStudentByNumberTask(newStudent1, 3, 6);
+
+        newHomeTask1.setMarkToHomeTask(12);
+        newHomeTask3.setMarkToHomeTask(6);
 
 
         HomeTask newHomeTask4 = new HomeTask("Subject4", "Header4", "Text4");
 
         newStudent1.addHomeTaskToStudent(newHomeTask4);
-        Student.setTaskMarkToStudentByNumberTask(newStudent1, 4, 4);
+        newHomeTask4.setMarkToHomeTask(4);
 
 
         HomeTask newHomeTask5 = new HomeTask("Subject5", "Header5", "Text5");
@@ -67,19 +66,20 @@ public class MyInstitute {
 
         System.out.println();
 
-        Student.setTaskMarkToStudentByNumberTask(newStudent2, 2, 8);
-        Student.setTaskMarkToStudentByNumberTask(newStudent2, 5, 9);
-        Student.setTaskMarkToStudentByNumberTask(newStudent2, 7, 10);
 
-
-        Student.setTaskMarkToStudentByNumberTask(newStudent3, 6, 11);
+        newHomeTask2.setMarkToHomeTask(8);
+        newHomeTask5.setMarkToHomeTask(9);
+        newHomeTask7.setMarkToHomeTask(10);
+        newHomeTask6.setMarkToHomeTask(11);
 
         System.out.println();
+
 
 
         Student.printListOfStudentTasksWithMarks(newStudent1);
         Student.printListOfStudentTasksWithMarks(newStudent2);
         Student.printListOfStudentTasksWithMarks(newStudent3);
+
 
        System.out.println();
 
@@ -93,9 +93,9 @@ public class MyInstitute {
         WorkWithHomeTasks.getBestStudentInTheGroup(newGroup1);
 
 
-        //Factorial
+        //Recursion
         Student  [] empty = new Student[0];
-        Student [] arrayAfterRecursion = WorkWithHomeTasks.GetStudentArrayWithMarkMoreThanValue(empty, Group.getArrayOfStudentsNumbersInTheGroup(newGroup1), 9);
+        Student [] arrayAfterRecursion = WorkWithHomeTasks.GetStudentArrayWithMarkMoreThanValue(empty, Group.getArrayOfStudentsInTheGroup(newGroup1), 9);
         System.out.println("\n Result of factorial's work");
         System.out.println(Arrays.toString(arrayAfterRecursion));
 
@@ -104,8 +104,21 @@ public class MyInstitute {
         Teacher Teacher3 = new Teacher("Prepod3", "Andrey", "Igorevich", Date.valueOf("1952-02-22"), "passport", "MB333754");
         Teacher Teacher4 = new Teacher("Prepod4", "Andrey", "Evgenievich", Date.valueOf("1942-06-23"), "passport", "MH712547");
 
-        System.out.println(Arrays.deepToString(Teacher.getArrayOfTeacher()));
+        System.out.println();
+
+        System.out.println("Array with teachers before Teacher3 has left the Institute");
+        System.out.println(Arrays.deepToString(Teacher.getArrayOfAllTeachers()));
         Teacher3.leaveInstitute();
-        System.out.println(Arrays.deepToString(Teacher.getArrayOfTeacher()));
+        System.out.println("Array with teachers after Teacher3 has left the Institute");
+        System.out.println(Arrays.deepToString(Teacher.getArrayOfAllTeachers()));
+
+
+        System.out.println();
+        System.out.println("List of Sudents before Leave");
+        newGroup1.printListOfStudentsInTheGroup();
+        newStudent2.leaveInstitute();
+        System.out.println("\n List of Sudents after Leave");
+        newGroup1.printListOfStudentsInTheGroup();
+
     }
 }

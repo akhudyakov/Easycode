@@ -1,5 +1,6 @@
 package HomeTaskInstitute;
 
+import java.util.Arrays;
 import java.util.UUID;
 
 /**
@@ -7,6 +8,7 @@ import java.util.UUID;
  */
 public class HomeTask {
     private UUID id;
+    private int mark;
     private String subjectOfHt;
     private int numberOfHt;
     private String headerOfHt;
@@ -77,4 +79,19 @@ public class HomeTask {
 
         return true;
     }
+
+    public int getMark() {
+        return mark;
+    }
+
+    public static int getMarkOfHomeTask(HomeTask ht) {
+        int mark = ht.getMark();
+        return mark;
+    }
+
+    public void setMarkToHomeTask(int mark) {
+        this.mark = mark;
+    }
+
 }
+

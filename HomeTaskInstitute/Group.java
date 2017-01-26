@@ -1,6 +1,7 @@
 package HomeTaskInstitute;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.UUID;
 
 /**
@@ -9,7 +10,6 @@ import java.util.UUID;
 public class Group {
 
     private UUID idGroup;
-    //    private UUID[] arrayWithStudents;
     private Student[] arrayWithStudents;
     private UUID leader;
     private int numberOfFaculty; // number of current faculty
@@ -19,12 +19,24 @@ public class Group {
     private int countOfGroupMembers; // number of students in the group
 
     private final int maxNumberStudentsInGroup = 30;
+    private static Group[] arrayOfAllGroups;
+    private static int countOfGroup;
+
+    static {
+        arrayOfAllGroups = new Group[0];
+    }
 
 
     public Group(int numberOfCourse, int numberOfFaculty, String groupNumber) {
+        countOfGroup++;
+        arrayOfAllGroups = Arrays.copyOf(arrayOfAllGroups, countOfGroup);
 
+        this.numberOfCourse = numberOfCourse;
+        this.numberOfFaculty = numberOfFaculty;
+        this.groupNumber = groupNumber;
         this.idGroup = UUID.randomUUID();
         this.groupName = String.valueOf(numberOfFaculty) + String.valueOf(numberOfCourse) + groupNumber;
+        arrayOfAllGroups[countOfGroup - 1] = this;
     }
 
     public UUID getIdGroup() {
@@ -55,7 +67,6 @@ public class Group {
         return numberOfCourse;
     }
 
-
     public void setNumberOfCourse(int numberOfCourse) {
         this.numberOfCourse = numberOfCourse;
     }
@@ -67,7 +78,6 @@ public class Group {
     public Student getStudentNumber(int index) {
         return arrayWithStudents[index];
     }
-
 
     public String getGroupNumber() {
         return groupNumber;
@@ -89,6 +99,13 @@ public class Group {
         return groupName;
     }
 
+    public static Group[] getArrayOfAllGroups() {
+        return arrayOfAllGroups;
+    }
+
+    public static int getCountOfGroup() {
+        return countOfGroup;
+    }
 
     @Override
     public String toString() {
@@ -118,12 +135,12 @@ public class Group {
 
 
     public void printListOfStudentsInTheGroup() {
-        String result = "{";
+        String result = "\n The " + this.toString() + " contains next Students: \n{";
         for (int i = 0; i < this.arrayWithStudents.length; i++) {
             if (i == this.arrayWithStudents.length - 1) {
                 result += this.arrayWithStudents[i];
             } else {
-                result += this.arrayWithStudents[i] + ";";
+                result += this.arrayWithStudents[i] + ";  \n";
             }
         }
         result += "}";
@@ -131,16 +148,16 @@ public class Group {
     }
 
 
+    public static Student[] getArrayOfStudentsInTheGroup(Group gr) {
+        return gr.arrayWithStudents;
+    }
 
-    public static Student[] getArrayOfStudentsNumbersInTheGroup(Group g) {
-        return g.arrayWithStudents;
+    public Student[] getArrayOfStudentsInTheGroup() {
+        return arrayWithStudents;
     }
 
 
-    //    public int addStudentToGroup(UUID idGr, UUID idStudent) {
     public int addStudentToGroup(Student st) {
-
-
 
         // what is better: creating array in constructor or here ?
         //if it is here I can check: "is array null" for equals
@@ -148,34 +165,20 @@ public class Group {
             this.arrayWithStudents = new Student[0];
         }
 
+        Comparator<Student> c = new Comparator<Student>() {
+            public int compare(Student s1, Student s2) {
+                return s1.getId().compareTo(s2.getId());
+            }
+        };
 
-//        if (Arrays.binarySearch(this.arrayWithStudents, st) < 0 & this.countOfGroupMembers < st.getMaxCourses()) {
-//        I commented out row which is above because of: java.lang.ClassCastException: HomeTaskInstitute.Student cannot be cast to java.lang.Comparable   Why? they have the same type Student
-//        and I cannot create array with only unique Students
-        if (this.countOfGroupMembers < getMaxNumberStudentsInGroup()) {
-
-
+        if (Arrays.binarySearch(this.arrayWithStudents, st, c) < 0 & this.countOfGroupMembers < getMaxNumberStudentsInGroup()) {
             this.countOfGroupMembers++;
             this.arrayWithStudents = Arrays.copyOf(this.arrayWithStudents, this.countOfGroupMembers);
-            this.arrayWithStudents[this.countOfGroupMembers - 1] = st;
-
-
+            this.arrayWithStudents[this.countOfGroupMembers - 1] = st; // adding Student to array the Group's students
+            st.setGroupOfStudent(this); // set Group to Student who has just been added
         } else {
-            System.out.println(" !!! Student with Name: " + getStudentFullNameByStudent(st) + " and with Student's Number: " + st.getNumberStudent() + " has already included into Group with Id" + getIdGroup() + " !!! ");
+            System.out.println(" !!! Student with Name: " + WorkWithStudent.getStudentFullNameByStudent(st) + " and with Student's Number: " + st.getNumberStudent() + " has already included into Group with Id" + getIdGroup() + " !!! ");
         }
-
-//        } else {
-//            System.out.println("!!!  Inputted parameter Id of Group is incorrect  !!!");
-//        }
         return countOfGroupMembers;
     }
-
-
-    public String getStudentFullNameByStudent(Student st) {
-
-        String result = st.getLastName() + " " + st.getFisrtName() + " " + st.getMiddleName();
-        return result;
-
-    }
-
 }
