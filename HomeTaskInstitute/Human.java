@@ -7,7 +7,7 @@ import java.util.Date;
  */
 public abstract class Human implements LeaveTheInstitute {
     private String lastName;
-    private String fisrtName;
+    private String firstName;
     private String middleName;
     private Date birthDate;
     private String phoneNumber;
@@ -18,7 +18,7 @@ public abstract class Human implements LeaveTheInstitute {
 
     public Human (String lastName, String fisrtName, String middleName, Date birthDate, String docType, String docNumber) {
 
-        this.fisrtName = fisrtName;
+        this.firstName = fisrtName;
         this.lastName = lastName;
         this.middleName = middleName;
         this.birthDate = birthDate;
@@ -26,8 +26,8 @@ public abstract class Human implements LeaveTheInstitute {
         this.documentNumber = docNumber;
     }
 
-    public String getFisrtName() {
-        return fisrtName;
+    public String getFirstName() {
+        return firstName;
     }
 
     public String getLastName() {

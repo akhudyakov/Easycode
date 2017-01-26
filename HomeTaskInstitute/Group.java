@@ -43,14 +43,6 @@ public class Group {
         return idGroup;
     }
 
-    public int getCountOfGroupMembers(UUID idGr) {
-        int count = -1;
-        if (this.idGroup == idGr) {
-            count = countOfGroupMembers;
-        }
-        return count;
-    }
-
     public int getCountOfGroupMembers() {
         return countOfGroupMembers;
     }
@@ -101,6 +93,10 @@ public class Group {
 
     public static Group[] getArrayOfAllGroups() {
         return arrayOfAllGroups;
+    }
+
+    public void setArrayWithStudents(Student[] arrayWithStudents) {
+        this.arrayWithStudents = arrayWithStudents;
     }
 
     public static int getCountOfGroup() {
@@ -177,7 +173,8 @@ public class Group {
             this.arrayWithStudents[this.countOfGroupMembers - 1] = st; // adding Student to array the Group's students
             st.setGroupOfStudent(this); // set Group to Student who has just been added
         } else {
-            System.out.println(" !!! Student with Name: " + WorkWithStudent.getStudentFullNameByStudent(st) + " and with Student's Number: " + st.getNumberStudent() + " has already included into Group with Id" + getIdGroup() + " !!! ");
+            System.out.println(" !!! Student with Name: " + WorkWithStudent.getStudentFullNameByStudent(st) + " and with Student's Number: " +
+                    st.getNumberStudent() + " has already included into Group with Id" + getIdGroup() + " !!! ");
         }
         return countOfGroupMembers;
     }

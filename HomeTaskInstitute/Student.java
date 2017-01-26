@@ -54,7 +54,7 @@ public class Student extends Human {
 
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");  //("yyyy-MM-dd");
 
-        String result = "Student with number: " + getNumberStudent() + "; Last Name = " + getLastName() + "; First Name = " + getFisrtName() +
+        String result = "Student with number: " + getNumberStudent() + "; Last Name = " + getLastName() + "; First Name = " + getFirstName() +
                 "; Middle Name = " + getMiddleName();
 //                + "; Birthdate = " + formatter.format(getBirthDate()) + "; Document =  "
 //                + getDocumentType() + "; Serie = " + getDocumentNumber() + "; Email = " + getEmail() +
@@ -74,7 +74,7 @@ public class Student extends Human {
 
         Student s = (Student) o;
         if (this.id != s.id) return false;
-        if (this.getFisrtName() != s.getFisrtName()) return false;
+        if (this.getFirstName() != s.getFirstName()) return false;
         if (this.getLastName() != s.getLastName()) return false;
         if (this.getMiddleName() != s.getMiddleName()) return false;
         if (this.getBirthDate() != s.getBirthDate()) return false;
@@ -92,7 +92,7 @@ public class Student extends Human {
     public int hashCode() {
         int result = id.hashCode();
         result = 31 * result + getLastName().hashCode();
-        result = 31 * result + getFisrtName().hashCode();
+        result = 31 * result + getFirstName().hashCode();
         result = 31 * result + getMiddleName().hashCode();
         result = 31 * result + getBirthDate().hashCode();
         result = 31 * result + getPhoneNumber().hashCode();
@@ -104,7 +104,7 @@ public class Student extends Human {
 
     public static String getStudentFullNameByStudent(Student st) {
 
-        String result = st.getLastName() + " " + st.getFisrtName() + " " + st.getMiddleName();
+        String result = st.getLastName() + " " + st.getFirstName() + " " + st.getMiddleName();
 
         return result;
     }
@@ -182,9 +182,10 @@ public class Student extends Human {
                 arrStudentsInTheGroup[i] = arrStudentsInTheGroup[i + 1];
             } else {
                 arrStudentsInTheGroup = Arrays.copyOf(arrStudentsInTheGroup, arrStudentsInTheGroup.length - 1);
-                int z = 0; // remove
+                break;
             }
         }
+        gr.setArrayWithStudents(arrStudentsInTheGroup);
         return arrStudentsInTheGroup;
     }
 }

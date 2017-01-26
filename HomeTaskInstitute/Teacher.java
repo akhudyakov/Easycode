@@ -63,7 +63,7 @@ public class Teacher extends Human {
     public String toString() {
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");  //("yyyy-MM-dd");
 
-//        String result = "Teacher with ID: " + getId() + "; Last Name = " + getLastName() + "; First Name = " + getFisrtName() +
+//        String result = "Teacher with ID: " + getId() + "; Last Name = " + getLastName() + "; First Name = " + getFirstName() +
 //                "; Middle Name = " + getMiddleName();
         String result = "Teacher with  Last Name = " + getLastName();
         return result;
