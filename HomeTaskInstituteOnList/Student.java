@@ -1,4 +1,4 @@
-package HomeTaskInstitute;
+package HomeTaskInstituteOnList;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -80,23 +80,23 @@ public class Student extends Human {
         if (this.getBirthDate() != s.getBirthDate()) return false;
         if (this.getDocumentType() != s.getDocumentType()) return false;
         if (this.getDocumentNumber() != s.getDocumentNumber()) return false;
-        if (this.getEmail() == null) return s.getEmail() == null;
-        if (this.getEmail() != s.getEmail()) return false;
-        if (this.getPhoneNumber() == null) return s.getPhoneNumber() == null;
-        if (this.getPhoneNumber() != s.getPhoneNumber()) return false;
+//        if (this.getEmail() == null) return s.getEmail() == null;
+//        if (this.getEmail() != s.getEmail()) return false;
+//        if (this.getPhoneNumber() == null) return s.getPhoneNumber() == null;
+//        if (this.getPhoneNumber() != s.getPhoneNumber()) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = id.hashCode();
+        int result = getId().hashCode();
         result = 31 * result + getLastName().hashCode();
         result = 31 * result + getFirstName().hashCode();
         result = 31 * result + getMiddleName().hashCode();
         result = 31 * result + getBirthDate().hashCode();
-        result = 31 * result + getPhoneNumber().hashCode();
-        result = 31 * result + (getEmail() != null ? getEmail().hashCode() : 0);
+//        result = 31 * result + getPhoneNumber().hashCode();
+//        result = 31 * result + (getEmail() != null ? getEmail().hashCode() : 0);
         result = 31 * result + getDocumentType().hashCode();
         result = 31 * result + getDocumentNumber().hashCode();
         return result;
@@ -122,7 +122,7 @@ public class Student extends Human {
             this.arrayOfHt = new HomeTask[1];
             this.arrayOfHt[(arrayOfHt.length - 1)] = ht;
         } else {
-            //   I get  java.lang.ClassCastException: HomeTaskInstitute.HomeTask cannot be cast to java.lang.Comparable for row is below. Both ar HomeTask type. Why do I get that?
+            //   I get  java.lang.ClassCastException: HomeTaskInstituteOldOnArrays.HomeTask cannot be cast to java.lang.Comparable for row is below. Both ar HomeTask type. Why do I get that?
             //if (Arrays.binarySearch(this.arrayOfHt, ht) < 0) {
 
             this.arrayOfHt = Arrays.copyOf(this.arrayOfHt, this.arrayOfHt.length + 1);
@@ -167,7 +167,7 @@ public class Student extends Human {
 
         Group gr = this.groupOfStudent; // link to Student's Group
         this.groupOfStudent = null;
-        Student[] arrStudentsInTheGroup = gr.getArrayOfStudentsInTheGroup();  // get  array of all Students of the Group
+        Student[] arrStudentsInTheGroup =  null; //gr.getArrayOfStudentsInTheGroup();  // get  array of all Students of the Group
 
         Comparator<Student> c = new Comparator<Student>() {
             public int compare(Student s1, Student s2) {
@@ -185,96 +185,8 @@ public class Student extends Human {
                 break;
             }
         }
-        gr.setArrayWithStudents(arrStudentsInTheGroup);
+//        gr.setArrayWithStudents(arrStudentsInTheGroup);
         return arrStudentsInTheGroup;
     }
 }
 
-// Everything0 regarding work with Old 2dimension array
-//---------------------
-// They are workable. but they need to be refactored
-//take into OOP model
-//array should be changed to type as <Class name>
-
-    /*
-    public void addHomeTaskToStudent(HomeTask ht) {
-
-        int numberHT = ht.getNumberOfHt();
-
-
-        if (this.arrayOfHt == null) {
-            this.arrayOfHt = new int[1][2];
-            this.arrayOfHt[(arrayOfHt.length - 1)][0] = numberHT;
-        } else {
-
-
-            if (mySearchInArray(this.arrayOfHt, numberHT) < 0) {
-
-                this.arrayOfHt = copyTwoDimArrayWithAddingLenght(this.arrayOfHt);
-                this.arrayOfHt[(arrayOfHt.length - 1)][0] = numberHT;
-
-//                System.out.println("Task" + Arrays.deepToString(this.arrayOfHt));
-
-            } else {
-                System.out.println(" !!! HomeTask with number: " + numberHT + " has already added into to Student with Id" + this.getId() + " !!! ");
-            }
-        }
-    }
-
-    public static int[][] copyTwoDimArrayWithAddingLenght(final int[][] array) { //copy previous state of 2 dimension array with increasing of array's lenght (row and column) on 1
-        if (array != null) {
-            final int[][] copy = new int[array.length + 1][2]; // increasing of array's length for row on 1
-
-            for (int i = 0; i < array.length; i++) {
-                final int[] row = array[i];
-
-                copy[i] = new int[row.length];
-                System.arraycopy(row, 0, copy[i], 0, row.length);
-            }
-
-            return copy;
-        }
-
-        return null;
-    }
-
-    public static int mySearchInArray(int[][] array, int searchKey) { // search only by rows
-
-        int position = -1;
-
-        for (int i = 0; i < array.length; i++) {
-
-            if (array[i][0] == searchKey) {
-                position = i;
-                break;
-            }
-
-        }
-        return position;
-    }
-
-public static void setTaskMarkToStudentByNumberTask(Student st, int numberTask, int mark) {
-        int position = -1;
-
-        if (mark >= HomeTask.getMinMark() & mark <= HomeTask.getMaxMark()) {
-
-            for (int i = 0; i < st.arrayOfHt.length; i++) {
-                if (st.arrayOfHt[i][0] == numberTask) {
-                    position = i;
-                    break;
-                }
-            }
-
-            if (position > -1) {
-                st.arrayOfHt[position][1] = mark;
-                System.out.println("Indicated task: \"" + numberTask + "\" has been added to student " + getStudentFullNameByStudent(st));
-            } else {
-                System.out.println("Student " + getStudentFullNameByStudent(st) + " does not have indicated task: " + numberTask);
-                return;
-            }
-        } else {
-            System.out.println("You inputted incorrect mark: " + mark);
-        }
-
-    }
-    */

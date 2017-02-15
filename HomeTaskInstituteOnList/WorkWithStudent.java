@@ -1,4 +1,4 @@
-package HomeTaskInstitute;
+package HomeTaskInstituteOnList;
 
 /**
  * Created by Andrey on 26.01.2017.

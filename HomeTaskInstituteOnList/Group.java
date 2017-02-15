@@ -1,16 +1,14 @@
-package HomeTaskInstitute;
+package HomeTaskInstituteOnList;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Created by Andrey on 16.01.2017.
  */
-public class Group {
+public class Group implements Iterable<Student> {
 
     private UUID idGroup;
-    private Student[] arrayWithStudents;
+    private HashSet<Student> arrayWithStudents = new HashSet<>();
     private UUID leader;
     private int numberOfFaculty; // number of current faculty
     private int numberOfCourse; // number of current course
@@ -28,6 +26,7 @@ public class Group {
 
 
     public Group(int numberOfCourse, int numberOfFaculty, String groupNumber) {
+
         countOfGroup++;
         arrayOfAllGroups = Arrays.copyOf(arrayOfAllGroups, countOfGroup);
 
@@ -67,8 +66,8 @@ public class Group {
         return maxNumberStudentsInGroup;
     }
 
-    public Student getStudentNumber(int index) {
-        return arrayWithStudents[index];
+    public boolean existStudentInGroup() {
+        return arrayWithStudents.contains(this);
     }
 
     public String getGroupNumber() {
@@ -95,12 +94,16 @@ public class Group {
         return arrayOfAllGroups;
     }
 
-    public void setArrayWithStudents(Student[] arrayWithStudents) {
-        this.arrayWithStudents = arrayWithStudents;
-    }
-
     public static int getCountOfGroup() {
         return countOfGroup;
+    }
+
+    public HashSet<Student> getArrayWithStudents() {
+        return arrayWithStudents;
+    }
+
+    public UUID getLeader() {
+        return leader;
     }
 
     @Override
@@ -129,37 +132,50 @@ public class Group {
         return true;
     }
 
+    @Override
+    public Iterator<Student> iterator() {
+        return new Itr();
+    }
+
+
+  /*  @Override
+    public void forEach(Consumer action) {
+
+    }
+
+    @Override
+    public Spliterator spliterator() {
+        return null;
+    }
+*/
 
     public void printListOfStudentsInTheGroup() {
         String result = "\n The " + this.toString() + " contains next Students: \n{";
-        for (int i = 0; i < this.arrayWithStudents.length; i++) {
-            if (i == this.arrayWithStudents.length - 1) {
-                result += this.arrayWithStudents[i];
-            } else {
-                result += this.arrayWithStudents[i] + ";  \n";
-            }
+        //Iterator<Student> studentIterator = arrayWithStudents.iterator();
+        Iterator<Student> studentIterator = this.iterator();
+        boolean exist;
+
+
+        while (exist = studentIterator.hasNext()) {
+            Student nextObj = studentIterator.next();
+            result += nextObj + ";  \n";
+
         }
         result += "}";
-        System.out.print(result);
+        System.out.println(result);
     }
 
 
-    public static Student[] getArrayOfStudentsInTheGroup(Group gr) {
-        return gr.arrayWithStudents;
-    }
+//    public static Student[] getArrayOfStudentsInTheGroup(Group gr) {
+//        return gr.arrayWithStudents;
+//    }
 
-    public Student[] getArrayOfStudentsInTheGroup() {
-        return arrayWithStudents;
-    }
+//    public Student[] getArrayOfStudentsInTheGroup() {
+//        return arrayWithStudents;
+//    }
 
 
-    public int addStudentToGroup(Student st) {
-
-        // what is better: creating array in constructor or here ?
-        //if it is here I can check: "is array null" for equals
-        if (this.arrayWithStudents == null) {
-            this.arrayWithStudents = new Student[0];
-        }
+    public void addStudentToGroup(Student st) {
 
         Comparator<Student> c = new Comparator<Student>() {
             public int compare(Student s1, Student s2) {
@@ -167,15 +183,65 @@ public class Group {
             }
         };
 
-        if (Arrays.binarySearch(this.arrayWithStudents, st, c) < 0 & this.countOfGroupMembers < getMaxNumberStudentsInGroup()) {
+        if (this.countOfGroupMembers < getMaxNumberStudentsInGroup()) {
             this.countOfGroupMembers++;
-            this.arrayWithStudents = Arrays.copyOf(this.arrayWithStudents, this.countOfGroupMembers);
-            this.arrayWithStudents[this.countOfGroupMembers - 1] = st; // adding Student to array the Group's students
-            st.setGroupOfStudent(this); // set Group to Student who has just been added
-        } else {
+            this.arrayWithStudents.add(st);
+
+
             System.out.println(" !!! Student with Name: " + WorkWithStudent.getStudentFullNameByStudent(st) + " and with Student's Number: " +
                     st.getNumberStudent() + " has already included into Group with Id" + getIdGroup() + " !!! ");
         }
-        return countOfGroupMembers;
+//        return countOfGroupMembers;
+    }
+
+    class Itr implements Iterator<Student> {
+
+        private int current;
+        private int next;
+        private HashSet<Student> studentHashSet = Group.this.getArrayWithStudents();
+
+
+        int expectedSize = studentHashSet.size();
+
+        Object[] studentArray = studentHashSet.toArray();
+
+        @Override
+        public boolean hasNext() {
+            int currentSize = studentHashSet.size();
+            if (expectedSize != currentSize) {
+                throw new ConcurrentModificationException();
+            }
+            return next < studentHashSet.size();
+        }
+
+        @Override
+        public Student next() {
+            if (hasNext()) {
+                current = next;
+                next++;
+            } else {
+                throw new NoSuchElementException();
+            }
+            return (Student) studentArray[current];
+//            return null;
+        }
+
+
+        @Override
+        public void remove() {
+            if (studentHashSet.size() > 0) {
+                studentHashSet.iterator().remove();
+            } else {
+                System.out.println("There is no items in Array");
+                throw new NoSuchElementException();
+            }
+        }
     }
 }
+
+
+
+
+
+
+
