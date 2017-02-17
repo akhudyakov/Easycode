@@ -10,7 +10,7 @@ import java.util.Iterator;
  */
 
 public class WorkWithHomeTasks {
-
+/*
     public static double getAverageMarkByStudent(Student st) {
         double averageMark = 0; // initial value of average of mark
         int count = 0; // number of marks which are set
@@ -22,7 +22,12 @@ public class WorkWithHomeTasks {
         for (int i = 0; i < arrHT.length; i++) {
 //            for (int j = 0; j < array[i].length ; j++) {
             tempTask = arrHT[i]; //each task for the student
-            mark = tempTask.getMark(); // mark for specific task
+
+
+//
+//               temp mark = 2
+
+            mark = 2; //tempTask.getMark(); // mark for specific task
             if (mark >=  2) { //if mark is set it meas that mark is in range 2 - 12
                 count++;
                 averageMark += mark; // general sum (not average))
@@ -79,7 +84,7 @@ public class WorkWithHomeTasks {
         averageMark = studentWithAverageMark[getPositionOfMaxInTwoDimArray(studentWithAverageMark)] [1];
         System.out.println("The best student is a student with number: " + (int)numberStudent + " with average mark: " + averageMark);
     }
-*/
+
 
 
 
@@ -146,7 +151,7 @@ public class WorkWithHomeTasks {
     }
 
 
-
+*/
 }
 
 

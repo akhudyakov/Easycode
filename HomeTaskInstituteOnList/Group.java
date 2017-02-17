@@ -14,9 +14,9 @@ public class Group implements Iterable<Student> {
     private int numberOfCourse; // number of current course
     private String groupNumber; // // number of current group in stream
     private String groupName; // common name which made of 3 components
-    private int countOfGroupMembers; // number of students in the group
 
-    private final int maxNumberStudentsInGroup = 30;
+
+    private final int Max_Number_Students_In_Group = 30;
     private static Group[] arrayOfAllGroups;
     private static int countOfGroup;
 
@@ -42,10 +42,6 @@ public class Group implements Iterable<Student> {
         return idGroup;
     }
 
-    public int getCountOfGroupMembers() {
-        return countOfGroupMembers;
-    }
-
     public int getNumberOfFaculty() {
         return numberOfFaculty;
     }
@@ -62,8 +58,8 @@ public class Group implements Iterable<Student> {
         this.numberOfCourse = numberOfCourse;
     }
 
-    public int getMaxNumberStudentsInGroup() {
-        return maxNumberStudentsInGroup;
+    public int getMax_Number_Students_In_Group() {
+        return Max_Number_Students_In_Group;
     }
 
     public boolean existStudentInGroup() {
@@ -109,7 +105,7 @@ public class Group implements Iterable<Student> {
     @Override
     public String toString() {
 
-        String result = "Group ID = " + getIdGroup() + "; Group Name = " + getGroupName();
+        String result = "Group " + getGroupName();
 
         return result;
     }
@@ -127,7 +123,6 @@ public class Group implements Iterable<Student> {
         if (this.arrayWithStudents != gr.arrayWithStudents) return false;
         if (this.leader == null) return gr.leader == null;
         if (this.leader != gr.leader) return false;
-        if (this.countOfGroupMembers != gr.countOfGroupMembers) return false;
 
         return true;
     }
@@ -155,43 +150,30 @@ public class Group implements Iterable<Student> {
         Iterator<Student> studentIterator = this.iterator();
         boolean exist;
 
-
         while (exist = studentIterator.hasNext()) {
             Student nextObj = studentIterator.next();
             result += nextObj + ";  \n";
-
         }
         result += "}";
         System.out.println(result);
     }
 
-
-//    public static Student[] getArrayOfStudentsInTheGroup(Group gr) {
-//        return gr.arrayWithStudents;
-//    }
-
-//    public Student[] getArrayOfStudentsInTheGroup() {
-//        return arrayWithStudents;
-//    }
-
-
     public void addStudentToGroup(Student st) {
 
-        Comparator<Student> c = new Comparator<Student>() {
-            public int compare(Student s1, Student s2) {
-                return s1.getId().compareTo(s2.getId());
-            }
-        };
-
-        if (this.countOfGroupMembers < getMaxNumberStudentsInGroup()) {
-            this.countOfGroupMembers++;
-            this.arrayWithStudents.add(st);
-
-
-            System.out.println(" !!! Student with Name: " + WorkWithStudent.getStudentFullNameByStudent(st) + " and with Student's Number: " +
-                    st.getNumberStudent() + " has already included into Group with Id" + getIdGroup() + " !!! ");
+        if (!arrayWithStudents.contains(st)) {
+          if (arrayWithStudents.size() < getMax_Number_Students_In_Group()) {
+//              this.countOfGroupMembers++;
+              this.arrayWithStudents.add(st);
+              System.out.println("Successfull!!! Student with Name: " + WorkWithStudent.getStudentFullNameByStudent(st) + " and with Number: " +
+                      st.getNumberStudent() + " has been included into Group " + getGroupName());
+          } else {
+              System.out.println("Error!!! " + this.toString() + " is full. We cannot add the " + st.toString() +
+                      " to the Group because Maximum number of students: " + getMax_Number_Students_In_Group() + "  in a group is already reached" );
+          }
+        } else {
+            System.out.println("Error !!! Student with Name: " + WorkWithStudent.getStudentFullNameByStudent(st) + " and with Number: " +
+                    st.getNumberStudent() + " has already included into the Group " + getGroupName() + " !!! ");
         }
-//        return countOfGroupMembers;
     }
 
     class Itr implements Iterator<Student> {
@@ -199,7 +181,6 @@ public class Group implements Iterable<Student> {
         private int current;
         private int next;
         private HashSet<Student> studentHashSet = Group.this.getArrayWithStudents();
-
 
         int expectedSize = studentHashSet.size();
 
@@ -225,7 +206,6 @@ public class Group implements Iterable<Student> {
             return (Student) studentArray[current];
 //            return null;
         }
-
 
         @Override
         public void remove() {

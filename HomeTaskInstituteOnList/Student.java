@@ -1,10 +1,7 @@
 package HomeTaskInstituteOnList;
 
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Created by adminnt on 15.01.17.
@@ -15,9 +12,7 @@ public class Student extends Human {
     private int numberStudent;
     private static Student[] arrayOfAllStudents;
     private Group groupOfStudent;
-
-    //    private int[][] arrayOfHt;  // all methods regarding 2 dimension array is obsolete and are in the end of this file
-    private HomeTask[] arrayOfHt; // array of home task of specific student
+    private HashMap<HomeTask, Marks> homeTasksWithMarks = new HashMap<>();
     private static int countOfStudents; // number of all students
     private final int Increment_Of_Course = 1;
 
@@ -109,65 +104,34 @@ public class Student extends Human {
         return result;
     }
 
-    public HomeTask[] getArrayOfHt() {
-        return arrayOfHt;
+
+    public void addHomeTaskToStudentWithoutMark(HomeTask ht) {
+        homeTasksWithMarks.put(ht, null);
+        System.out.println(ht.toString() + " has been added to " + this.toString() + " without a mark");
     }
 
-    public void addHomeTaskToStudent(HomeTask ht) {
+    public void addHomeTaskToStudentWithMark(HomeTask ht, Marks m) {
+        homeTasksWithMarks.put(ht, m);
+        System.out.println(ht.toString() + " has been added to " + this.toString() + " with the mark " + m.getMark());
+    }
 
-        //int numberHT = ht.getNumberOfHt();
+    public void setMarkToHomeTask(HomeTask ht, Marks m) {
 
-
-        if (this.arrayOfHt == null) {
-            this.arrayOfHt = new HomeTask[1];
-            this.arrayOfHt[(arrayOfHt.length - 1)] = ht;
+        if (homeTasksWithMarks.containsKey(ht)) {
+            homeTasksWithMarks.put(ht, m);
+            System.out.println(ht.toString() + " has been added to " + this.toString() + " with the mark " + m.getMark());
         } else {
-            //   I get  java.lang.ClassCastException: HomeTaskInstituteOldOnArrays.HomeTask cannot be cast to java.lang.Comparable for row is below. Both ar HomeTask type. Why do I get that?
-            //if (Arrays.binarySearch(this.arrayOfHt, ht) < 0) {
-
-            this.arrayOfHt = Arrays.copyOf(this.arrayOfHt, this.arrayOfHt.length + 1);
-            this.arrayOfHt[(arrayOfHt.length - 1)] = ht;
-
-//                System.out.println("Task" + Arrays.deepToString(this.arrayOfHt));
-
-//            } else {
-//                System.out.println(" !!! HomeTask " + ht.toString() + " has already added into to Student " + this.toString() + " !!! ");
+            System.out.println("!!! Warning !!! There is no specific " + ht.toString() + " belongs to " + this.toString() + " !!!");
         }
     }
 
-
-    public static void printListOfStudentTasks(Student st) {
-        String result = " Student " + getStudentFullNameByStudent(st) + " has next tasks:  {";
-
-        for (int i = 0; i < st.arrayOfHt.length; i++) {
-            if (i == st.arrayOfHt.length - 1) {
-                result += String.valueOf(st.arrayOfHt[i]);
-            } else {
-                result += String.valueOf(st.arrayOfHt[i]) + ";";
-            }
-        }
-        result += "}";
-        System.out.println(result);
-    }
-
-
-    public static void printListOfStudentTasksWithMarks(Student st) {
-        HomeTask tempTask;
-        int mark;
-
-        for (int i = 0; i < st.arrayOfHt.length; i++) {
-            tempTask = st.arrayOfHt[i]; //each task for the student
-            mark = tempTask.getMark();
-            System.out.println(st.toString() + " Task with: " + tempTask.toString() + " has the mark " + mark);
-        }
-    }
 
     @Override
     public Student[] leaveInstitute() {
 
         Group gr = this.groupOfStudent; // link to Student's Group
         this.groupOfStudent = null;
-        Student[] arrStudentsInTheGroup =  null; //gr.getArrayOfStudentsInTheGroup();  // get  array of all Students of the Group
+        Student[] arrStudentsInTheGroup = null; //gr.getArrayOfStudentsInTheGroup();  // get  array of all Students of the Group
 
         Comparator<Student> c = new Comparator<Student>() {
             public int compare(Student s1, Student s2) {
@@ -188,5 +152,34 @@ public class Student extends Human {
 //        gr.setArrayWithStudents(arrStudentsInTheGroup);
         return arrStudentsInTheGroup;
     }
+
+
+/*
+    public static void printListOfStudentTasksWithMarks(Student st) {
+        HomeTask tempTask;
+        int mark;
+
+        for (int i = 0; i < st.arrayOfHt.length; i++) {
+            tempTask = st.arrayOfHt[i]; //each task for the student
+            mark = 2; //tempTask.getMark();
+            System.out.println(st.toString() + " Task with: " + tempTask.toString() + " has the mark " + mark);
+        }
+    }
+
+    public static void printListOfStudentTasks(Student st) {
+        String result = " Student " + getStudentFullNameByStudent(st) + " has next tasks:  {";
+
+        for (int i = 0; i < st.arrayOfHt.length; i++) {
+            if (i == st.arrayOfHt.length - 1) {
+                result += String.valueOf(st.arrayOfHt[i]);
+            } else {
+                result += String.valueOf(st.arrayOfHt[i]) + ";";
+            }
+        }
+        result += "}";
+        System.out.println(result);
+    }
+    */
 }
+
 

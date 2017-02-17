@@ -23,7 +23,7 @@ public class MyInstitute {
         Group newGroup2 = new Group(1, 3, "8");
 
         newGroup1.addStudentToGroup(newStudent1);
-//      newGroup1.addStudentToGroup(newStudent1); // negative. add existed Student 1
+        newGroup1.addStudentToGroup(newStudent1); // negative. add existed Student 1
         newGroup1.addStudentToGroup(newStudent2); // positive. add second student
         newGroup1.addStudentToGroup(newStudent3);
 
@@ -46,24 +46,38 @@ public class MyInstitute {
         System.out.println();
 
 
+        HomeTaskStore storeOfHomeTasks = new HomeTaskStore();
+
         HomeTask newHomeTask1 = new HomeTask("Subject1", "Header1", "Text1");
 
-        newStudent1.addHomeTaskToStudent(newHomeTask1);
+        storeOfHomeTasks.addHomeTask(newHomeTask1);
+
+        newStudent1.addHomeTaskToStudentWithoutMark(newHomeTask1);
+        newStudent1.addHomeTaskToStudentWithMark(newHomeTask1, Marks.SEVEN);
+
 
         HomeTask newHomeTask2 = new HomeTask("Subject2", "Header2", "Text2");
+        newStudent1.setMarkToHomeTask(newHomeTask2, Marks.ELEVEN);
 
-        newStudent2.addHomeTaskToStudent(newHomeTask2);
+
+/*
+
+        storeOfHomeTasks.addHomeTask(newHomeTask2);
+
+//        newStudent2.addHomeTaskToStudent(newHomeTask2);
 
         HomeTask newHomeTask3 = new HomeTask("Subject3", "Header3", "Text3");
 
-        newStudent1.addHomeTaskToStudent(newHomeTask3);
+        storeOfHomeTasks.addHomeTask(newHomeTask3);
+
+//        newStudent1.addHomeTaskToStudent(newHomeTask3);
 
 
-        newHomeTask1.setMarkToHomeTask(Marks.TWO);
+//        newHomeTask1.setMarkToHomeTask(Marks.TWO);
+        storeOfHomeTasks.printAllHomeTasks();
 
-
-        System.out.println(newHomeTask1);
-        System.out.println(newHomeTask2);
+//        System.out.println(newHomeTask1);
+//        System.out.println(newHomeTask2);
         /*newHomeTask3.setMarkToHomeTask(6);
 
 

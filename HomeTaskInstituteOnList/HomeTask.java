@@ -7,16 +7,12 @@ import java.util.UUID;
  */
 public class HomeTask {
     private UUID id;
-    private Marks mark;
+//    private Marks mark;
     private String subjectOfHt;
     private int numberOfHt;
     private String headerOfHt;
     private String textOfHt;
     private static int count;
-
-    private final static int minMark = 2;
-    private final static int maxMark = 12;
-
 
     public HomeTask(String subjectOfHt, String headerOfHt, String textOfHt) {
         count++;
@@ -26,6 +22,7 @@ public class HomeTask {
         this.subjectOfHt = subjectOfHt;
         this.headerOfHt = headerOfHt;
         this.textOfHt = textOfHt;
+
     }
 
     public UUID getId() {
@@ -48,17 +45,9 @@ public class HomeTask {
         return textOfHt;
     }
 
-    public static int getMinMark() {
-        return minMark;
-    }
-
-    public static int getMaxMark() {
-        return maxMark;
-    }
-
     public String toString() {
-        String result = "Home task with ID: " + getId() + " and its number: " + getNumberOfHt() + " has the  Subject: " + getSubjectOfHt() +
-                "; the header is: " + getHeaderOfHt() + " and text is: " + getTextOfHt() + (mark != null ? ", Mark is: "+ getMark() : ", There is no mark for the Home Task");
+        String result = "Home task with number: " + getNumberOfHt() + " has the  Subject: " + getSubjectOfHt() +
+                "; the header is: " + getHeaderOfHt() + " and text is: " + getTextOfHt(); // + (mark != null ? ", Mark is: "+ getMark() : ", There is no mark for the Home Task");
         return result;
     }
 
@@ -79,8 +68,10 @@ public class HomeTask {
         return true;
     }
 
+/*
     public int getMark() {
         return mark.getMark();
+
     }
 
     public static int getMarkOfHomeTask(HomeTask ht) {
@@ -91,6 +82,6 @@ public class HomeTask {
     public void setMarkToHomeTask(Marks mark) {
         this.mark = mark;
     }
-
+*/
 }
 
