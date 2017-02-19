@@ -12,21 +12,31 @@ public class MyInstitute {
     public static void main(String[] args) {
 
 
-
+        // adding new Students
         Student newStudent1 = new Student("Ivanov", "Petr", "Sergeevich", Date.valueOf("1973-11-25"), "passport", "MK123456");
-
         Student newStudent2 = new Student("Petrov", "Andriy", "Igorevich", Date.valueOf("1985-09-19"), "passport", "MH987654");
         Student newStudent3 = new Student("Sidorov", "Ivan", "Nikolaevich", Date.valueOf("1995-06-21"), "passport", "MC761254");
         Student newStudent4 = new Student("Aronov", "Nikolay", "Semenovich", Date.valueOf("2001-01-11"), "passport", "ME51298");
 
+        // adding new Groups
         Group newGroup1 = new Group(1, 3, "7");
         Group newGroup2 = new Group(1, 3, "8");
 
+        // new Student Store1
+        StudentsStore studentsStore1 = new StudentsStore();
+        // adding Students to the Store1
+        studentsStore1.addStudentToStore(newStudent1);
+        studentsStore1.addStudentToStore(newStudent2);
+        studentsStore1.addStudentToStore(newStudent3);
+        studentsStore1.addStudentToStore(newStudent4);
+
+
+        // adding Students:1,2,3 to Group1
         newGroup1.addStudentToGroup(newStudent1);
         newGroup1.addStudentToGroup(newStudent1); // negative. add existed Student 1
-        newGroup1.addStudentToGroup(newStudent2); // positive. add second student
+        newGroup1.addStudentToGroup(newStudent2);
         newGroup1.addStudentToGroup(newStudent3);
-
+        // adding Student4 to Group2
         newGroup2.addStudentToGroup(newStudent4);
 
         /**
@@ -43,7 +53,11 @@ public class MyInstitute {
         for (Student s: newGroup1) {
             System.out.println("s = " + s);
         }
-        System.out.println();
+        System.out.println("-----------------------------");
+
+        newStudent3.leaveInstitute();
+
+
 
 
         HomeTaskStore storeOfHomeTasks = new HomeTaskStore();

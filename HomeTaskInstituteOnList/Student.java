@@ -10,7 +10,7 @@ public class Student extends Human {
 
     private UUID id;
     private int numberStudent;
-    private static Student[] arrayOfAllStudents;
+//    private static Student[] arrayOfAllStudents;
     private Group groupOfStudent;
     private HashMap<HomeTask, Marks> homeTasksWithMarks = new HashMap<>();
     private static int countOfStudents; // number of all students
@@ -21,6 +21,7 @@ public class Student extends Human {
         countOfStudents++;
         this.id = UUID.randomUUID();
         this.numberStudent = countOfStudents;
+
     }
 
     public UUID getId() {
@@ -43,14 +44,13 @@ public class Student extends Human {
         return Increment_Of_Course;
     }
 
-
     @Override
     public String toString() {
 
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");  //("yyyy-MM-dd");
 
         String result = "Student with number: " + getNumberStudent() + "; Last Name = " + getLastName() + "; First Name = " + getFirstName() +
-                "; Middle Name = " + getMiddleName();
+                "; Middle Name = " + getMiddleName() + (getGroupOfStudent()!=null?" is  learning in a group " + getGroupOfStudent():" has not included in a Group yet");
 //                + "; Birthdate = " + formatter.format(getBirthDate()) + "; Document =  "
 //                + getDocumentType() + "; Serie = " + getDocumentNumber() + "; Email = " + getEmail() +
 //                "; Phone number = " + getPhoneNumber() +  "; ID = " + getId();
@@ -127,30 +127,24 @@ public class Student extends Human {
 
 
     @Override
-    public Student[] leaveInstitute() {
+    public void leaveInstitute() {
 
         Group gr = this.groupOfStudent; // link to Student's Group
         this.groupOfStudent = null;
-        Student[] arrStudentsInTheGroup = null; //gr.getArrayOfStudentsInTheGroup();  // get  array of all Students of the Group
 
-        Comparator<Student> c = new Comparator<Student>() {
-            public int compare(Student s1, Student s2) {
-                return s1.getId().compareTo(s2.getId());
-            }
-        };
+        HashSet<Student> arrayWithStudents = gr.getArrayWithStudents();
 
-        int indexInArray = Arrays.binarySearch(arrStudentsInTheGroup, this, c);
+        arrayWithStudents.remove(this);
 
-        for (int i = indexInArray; i < arrStudentsInTheGroup.length; i++) {
-            if (i < arrStudentsInTheGroup.length - 1) {
-                arrStudentsInTheGroup[i] = arrStudentsInTheGroup[i + 1];
-            } else {
-                arrStudentsInTheGroup = Arrays.copyOf(arrStudentsInTheGroup, arrStudentsInTheGroup.length - 1);
-                break;
-            }
-        }
-//        gr.setArrayWithStudents(arrStudentsInTheGroup);
-        return arrStudentsInTheGroup;
+
+
+//        Comparator<Student> c = new Comparator<Student>() {
+//            public int compare(Student s1, Student s2) {
+//                return s1.getId().compareTo(s2.getId());
+//            }
+//        };
+
+
     }
 
 

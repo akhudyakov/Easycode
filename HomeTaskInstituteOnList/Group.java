@@ -164,6 +164,7 @@ public class Group implements Iterable<Student> {
           if (arrayWithStudents.size() < getMax_Number_Students_In_Group()) {
 //              this.countOfGroupMembers++;
               this.arrayWithStudents.add(st);
+              st.setGroupOfStudent(this);
               System.out.println("Successfull!!! Student with Name: " + WorkWithStudent.getStudentFullNameByStudent(st) + " and with Number: " +
                       st.getNumberStudent() + " has been included into Group " + getGroupName());
           } else {

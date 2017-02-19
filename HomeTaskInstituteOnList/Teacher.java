@@ -71,7 +71,7 @@ public class Teacher extends Human {
 
 
     @Override
-    public Teacher[] leaveInstitute() {
+    public void leaveInstitute() {
         //Teacher[] arrOfTeachers = getArrayOfAllTeachers();
         int position = -1;
 
@@ -90,6 +90,6 @@ public class Teacher extends Human {
                 break;
             }
         }
-        return arrayOfAllTeachers;
+//        return arrayOfAllTeachers;
     }
 }

@@ -5,5 +5,5 @@ package HomeTaskInstituteOnList;
  */
 public interface LeaveTheInstitute {
 
-    Object [] leaveInstitute();
+    void leaveInstitute();
 }
