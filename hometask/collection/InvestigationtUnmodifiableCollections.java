@@ -7,8 +7,11 @@ import java.util.List;
 
 /**
  * Created by Andrey on 17.02.2017.
+ *
+ *    IT IS NOT HOME TASK
+ *
  */
-public class TestUnmodifiableCollections {
+public class InvestigationtUnmodifiableCollections {
 
     public static void main(String[] args) {
        List<String> modifiableList = new ArrayList<String>();
