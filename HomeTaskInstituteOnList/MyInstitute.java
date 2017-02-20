@@ -30,6 +30,8 @@ public class MyInstitute {
         studentsStore1.addStudentToStore(newStudent3);
         studentsStore1.addStudentToStore(newStudent4);
 
+        System.out.println(studentsStore1);
+
 
         // adding Students:1,2,3 to Group1
         newGroup1.addStudentToGroup(newStudent1);
@@ -56,8 +58,8 @@ public class MyInstitute {
         System.out.println("-----------------------------");
 
         newStudent3.leaveInstitute();
-
-
+        System.out.println(newGroup1.getArrayWithStudents());
+        System.out.println(studentsStore1);
 
 
         HomeTaskStore storeOfHomeTasks = new HomeTaskStore();

@@ -6,7 +6,7 @@ import java.util.*;
 /**
  * Created by adminnt on 15.01.17.
  */
-public class Student extends Human {
+public class Student extends Human implements Comparable<Student> {
 
     private UUID id;
     private int numberStudent;
@@ -49,8 +49,8 @@ public class Student extends Human {
 
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");  //("yyyy-MM-dd");
 
-        String result = "Student with number: " + getNumberStudent() + "; Last Name = " + getLastName() + "; First Name = " + getFirstName() +
-                "; Middle Name = " + getMiddleName() + (getGroupOfStudent()!=null?" is  learning in a group " + getGroupOfStudent():" has not included in a Group yet");
+        String result = "Student with number: " + getNumberStudent() + "; Last Name = " + getLastName() + // "; First Name = " + getFirstName() +    "; Middle Name = " + getMiddleName() +
+              (getGroupOfStudent()!=null?" is  learning in a group " + getGroupOfStudent():" has not included in a Group yet");
 //                + "; Birthdate = " + formatter.format(getBirthDate()) + "; Document =  "
 //                + getDocumentType() + "; Serie = " + getDocumentNumber() + "; Email = " + getEmail() +
 //                "; Phone number = " + getPhoneNumber() +  "; ID = " + getId();
@@ -125,27 +125,22 @@ public class Student extends Human {
         }
     }
 
+    @Override
+    public int compareTo(Student o) {
+        return this.getId().compareTo(o.getId());
+    }
+
 
     @Override
     public void leaveInstitute() {
-
         Group gr = this.groupOfStudent; // link to Student's Group
-        this.groupOfStudent = null;
+        this.groupOfStudent = null; // remove link to Group from property of the Student
 
         HashSet<Student> arrayWithStudents = gr.getArrayWithStudents();
-
         arrayWithStudents.remove(this);
-
-
-
-//        Comparator<Student> c = new Comparator<Student>() {
-//            public int compare(Student s1, Student s2) {
-//                return s1.getId().compareTo(s2.getId());
-//            }
-//        };
-
-
     }
+
+
 
 
 /*
