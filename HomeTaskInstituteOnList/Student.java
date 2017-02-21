@@ -10,8 +10,8 @@ public class Student extends Human implements Comparable<Student> {
 
     private UUID id;
     private int numberStudent;
-//    private static Student[] arrayOfAllStudents;
-    private Group groupOfStudent;
+     private Group groupOfStudent;
+    private StudentsStore studentsStore;
     private HashMap<HomeTask, Marks> homeTasksWithMarks = new HashMap<>();
     private static int countOfStudents; // number of all students
     private final int Increment_Of_Course = 1;
@@ -44,13 +44,17 @@ public class Student extends Human implements Comparable<Student> {
         return Increment_Of_Course;
     }
 
+    public StudentsStore getStudentsStore() { return studentsStore; }
+
+    public void setStudentsStore(StudentsStore studentsStore) { this.studentsStore = studentsStore; }
+
     @Override
     public String toString() {
 
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");  //("yyyy-MM-dd");
 
         String result = "Student with number: " + getNumberStudent() + "; Last Name = " + getLastName() + // "; First Name = " + getFirstName() +    "; Middle Name = " + getMiddleName() +
-              (getGroupOfStudent()!=null?" is  learning in a group " + getGroupOfStudent():" has not included in a Group yet");
+                (getGroupOfStudent() != null ? " is  studying in " + getGroupOfStudent() : " who has not included in a Group yet");
 //                + "; Birthdate = " + formatter.format(getBirthDate()) + "; Document =  "
 //                + getDocumentType() + "; Serie = " + getDocumentNumber() + "; Email = " + getEmail() +
 //                "; Phone number = " + getPhoneNumber() +  "; ID = " + getId();
@@ -133,42 +137,65 @@ public class Student extends Human implements Comparable<Student> {
 
     @Override
     public void leaveInstitute() {
-        Group gr = this.groupOfStudent; // link to Student's Group
-        this.groupOfStudent = null; // remove link to Group from property of the Student
 
-        HashSet<Student> arrayWithStudents = gr.getArrayWithStudents();
-        arrayWithStudents.remove(this);
-    }
-
+        /**
+         *  Remove everything regarding student's Hometasks(+marks)
+         */
+        Set<HomeTask> homeTasks = homeTasksWithMarks.keySet(); // get set of the Student's HomeTask from their array HomeTask + Mark
 
 
+        if (!homeTasks.isEmpty()) {
+            for (HomeTask homeTask: homeTasks) {
+                HomeTaskStore homeTaskStore = homeTask.getHomeTaskStore(); // get link to Store of  HomeTask Store where are stored  student's HomeTasks
+                homeTaskStore.removeTaskFromTaskStore(homeTask);// remove the task from the Store
 
-/*
-    public static void printListOfStudentTasksWithMarks(Student st) {
-        HomeTask tempTask;
-        int mark;
-
-        for (int i = 0; i < st.arrayOfHt.length; i++) {
-            tempTask = st.arrayOfHt[i]; //each task for the student
-            mark = 2; //tempTask.getMark();
-            System.out.println(st.toString() + " Task with: " + tempTask.toString() + " has the mark " + mark);
-        }
-    }
-
-    public static void printListOfStudentTasks(Student st) {
-        String result = " Student " + getStudentFullNameByStudent(st) + " has next tasks:  {";
-
-        for (int i = 0; i < st.arrayOfHt.length; i++) {
-            if (i == st.arrayOfHt.length - 1) {
-                result += String.valueOf(st.arrayOfHt[i]);
-            } else {
-                result += String.valueOf(st.arrayOfHt[i]) + ";";
+                homeTasksWithMarks.remove(homeTask); //remove hometask+mark from array of Student's array of <Hometask, Mark>
+                homeTask.setHomeTaskStore(null);
             }
         }
-        result += "}";
-        System.out.println(result);
+
+
+        Group group = this.groupOfStudent; // link to Student's Group
+        this.groupOfStudent = null; // remove link to Group from property of the Student
+
+        HashSet<Student> arrayWithStudents = group.getArrayWithStudents(); // array of Students in their Group
+        arrayWithStudents.remove(this);
+
+        StudentsStore store = this.studentsStore; // store of Students
+        store.removeStudentFromStore(this);
     }
-    */
+
+
+    public void printListOfStudentTasksWithMarks() {
+
+        if(!homeTasksWithMarks.isEmpty()) {
+            System.out.println("\nThe " + this.toString() + " has next Home Tasks with marks: \n{");
+            for (Map.Entry<HomeTask, Marks> eachHomeTasksWithMarks : homeTasksWithMarks.entrySet()) {
+                HomeTask homeTask = eachHomeTasksWithMarks.getKey();
+                Marks mark = eachHomeTasksWithMarks.getValue();
+                System.out.print(" Task : " + homeTask.toString() +  (mark != null ? " with mark : "+ mark.getMark() + "\n" : "has not had a mark yet \n"));
+            }
+            System.out.print("}");
+        } else {
+            System.out.println("\nThere are no home tasks for the " + this.toString());
+        }
+    }
+
+    public void printListOfStudentTasks() {
+
+
+        if(!homeTasksWithMarks.isEmpty()) {
+            System.out.println("\nStudent \"" + getStudentFullNameByStudent(this) + "\" has next tasks:  \n{");
+            for (Map.Entry<HomeTask, Marks> eachHomeTasksWithMarks : homeTasksWithMarks.entrySet()) {
+                HomeTask homeTask = eachHomeTasksWithMarks.getKey();
+                System.out.print(homeTask.toString() + "\n");
+            }
+            System.out.print("}");
+        } else {
+            System.out.println("\nThere are no home tasks for the " + this.toString());
+        }
+    }
+
 }
 
 

@@ -30,9 +30,6 @@ public class MyInstitute {
         studentsStore1.addStudentToStore(newStudent3);
         studentsStore1.addStudentToStore(newStudent4);
 
-        System.out.println(studentsStore1);
-
-
         // adding Students:1,2,3 to Group1
         newGroup1.addStudentToGroup(newStudent1);
         newGroup1.addStudentToGroup(newStudent1); // negative. add existed Student 1
@@ -55,79 +52,73 @@ public class MyInstitute {
         for (Student s: newGroup1) {
             System.out.println("s = " + s);
         }
-        System.out.println("-----------------------------");
-
-        newStudent3.leaveInstitute();
-        System.out.println(newGroup1.getArrayWithStudents());
-        System.out.println(studentsStore1);
 
 
         HomeTaskStore storeOfHomeTasks = new HomeTaskStore();
 
         HomeTask newHomeTask1 = new HomeTask("Subject1", "Header1", "Text1");
-
+        // add hometask1 to Home Task store
         storeOfHomeTasks.addHomeTask(newHomeTask1);
 
-        newStudent1.addHomeTaskToStudentWithoutMark(newHomeTask1);
-        newStudent1.addHomeTaskToStudentWithMark(newHomeTask1, Marks.SEVEN);
+        newStudent1.addHomeTaskToStudentWithoutMark(newHomeTask1); // adding only a HomeTask
+        newStudent1.addHomeTaskToStudentWithMark(newHomeTask1, Marks.SEVEN); // set a Mark for the HomeTask (the Hometask had already been added)
 
 
         HomeTask newHomeTask2 = new HomeTask("Subject2", "Header2", "Text2");
-        newStudent1.setMarkToHomeTask(newHomeTask2, Marks.ELEVEN);
-
-
-/*
-
+        // add hometask2 to Home Task store
         storeOfHomeTasks.addHomeTask(newHomeTask2);
 
-//        newStudent2.addHomeTaskToStudent(newHomeTask2);
+        newStudent1.setMarkToHomeTask(newHomeTask2, Marks.ELEVEN); // negative case (student newStudent1 does not have the task newHomeTask2)
+        newStudent1.addHomeTaskToStudentWithoutMark(newHomeTask2);
+        newStudent1.setMarkToHomeTask(newHomeTask2, Marks.ELEVEN);
 
         HomeTask newHomeTask3 = new HomeTask("Subject3", "Header3", "Text3");
-
+        // add hometask3 to Home Task store
         storeOfHomeTasks.addHomeTask(newHomeTask3);
-
-//        newStudent1.addHomeTaskToStudent(newHomeTask3);
-
-
-//        newHomeTask1.setMarkToHomeTask(Marks.TWO);
-        storeOfHomeTasks.printAllHomeTasks();
-
-//        System.out.println(newHomeTask1);
-//        System.out.println(newHomeTask2);
-        /*newHomeTask3.setMarkToHomeTask(6);
-
+        newStudent3.addHomeTaskToStudentWithMark(newHomeTask3, Marks.NINE);
 
         HomeTask newHomeTask4 = new HomeTask("Subject4", "Header4", "Text4");
+        // add hometask4 to Home Task store
+        storeOfHomeTasks.addHomeTask(newHomeTask2); // negative - hometask2 already exists in store
+        storeOfHomeTasks.addHomeTask(newHomeTask4); // positive
 
-        newStudent1.addHomeTaskToStudent(newHomeTask4);
-        newHomeTask4.setMarkToHomeTask(4);
+//        storeOfHomeTasks.printAllHomeTasks();
+        newStudent1.addHomeTaskToStudentWithMark(newHomeTask4, Marks.SIX);
+
 
 
         HomeTask newHomeTask5 = new HomeTask("Subject5", "Header5", "Text5");
+        storeOfHomeTasks.addHomeTask(newHomeTask5); 
         HomeTask newHomeTask6 = new HomeTask("Subject6", "Header6", "Text6");
+        storeOfHomeTasks.addHomeTask(newHomeTask6); 
         HomeTask newHomeTask7 = new HomeTask("Subject5", "Header7", "Text7");
+        storeOfHomeTasks.addHomeTask(newHomeTask7); 
 
-        newStudent2.addHomeTaskToStudent(newHomeTask5);
-        newStudent2.addHomeTaskToStudent(newHomeTask7);
-        newStudent3.addHomeTaskToStudent(newHomeTask6);
-
-        System.out.println();
-
-
-        newHomeTask2.setMarkToHomeTask(8);
-        newHomeTask5.setMarkToHomeTask(9);
-        newHomeTask7.setMarkToHomeTask(10);
-        newHomeTask6.setMarkToHomeTask(11);
-
-        System.out.println();
+        newStudent2.addHomeTaskToStudentWithMark(newHomeTask5, Marks.NINE);
+        newStudent2.addHomeTaskToStudentWithMark(newHomeTask6, Marks.TEN);
+        newStudent2.addHomeTaskToStudentWithMark(newHomeTask7, Marks.ELEVEN);
 
 
+        newStudent1.printListOfStudentTasksWithMarks();
+        newStudent2.printListOfStudentTasksWithMarks();
+        newStudent3.printListOfStudentTasksWithMarks();
 
-        Student.printListOfStudentTasksWithMarks(newStudent1);
-        Student.printListOfStudentTasksWithMarks(newStudent2);
-        Student.printListOfStudentTasksWithMarks(newStudent3);
 
+        System.out.println("-----------------------------");
+        System.out.println("Leave the institute " + newStudent3);
 
+        newStudent3.leaveInstitute();
+        System.out.println(newGroup1.getArrayWithStudents());
+        System.out.println(studentsStore1);
+
+        System.out.println("-----------------------------");
+
+        System.out.println(studentsStore1);
+        System.out.println(storeOfHomeTasks);
+        newStudent1.printListOfStudentTasks();
+        newStudent3.printListOfStudentTasksWithMarks();
+
+/*
        System.out.println();
 
        System.out.println("Student1 has average mark: " + WorkWithHomeTasks.getAverageMarkByStudent(newStudent1));

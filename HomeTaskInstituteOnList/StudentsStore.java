@@ -25,5 +25,8 @@ public class StudentsStore {
 
     public void addStudentToStore(Student s) {
         storeStudents.add(s);
+        s.setStudentsStore(this);
     }
+
+    public void removeStudentFromStore(Student s) {storeStudents.remove(s);}
 }
