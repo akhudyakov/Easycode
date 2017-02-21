@@ -14,28 +14,16 @@ public class Group implements Iterable<Student> {
     private int numberOfCourse; // number of current course
     private String groupNumber; // // number of current group in stream
     private String groupName; // common name which made of 3 components
-
-
+    private  GroupStore groupStore;
     private final int Max_Number_Students_In_Group = 30;
-    private static Group[] arrayOfAllGroups;
-    private static int countOfGroup;
-
-    static {
-        arrayOfAllGroups = new Group[0];
-    }
 
 
     public Group(int numberOfCourse, int numberOfFaculty, String groupNumber) {
-
-        countOfGroup++;
-        arrayOfAllGroups = Arrays.copyOf(arrayOfAllGroups, countOfGroup);
-
         this.numberOfCourse = numberOfCourse;
         this.numberOfFaculty = numberOfFaculty;
         this.groupNumber = groupNumber;
         this.idGroup = UUID.randomUUID();
         this.groupName = String.valueOf(numberOfFaculty) + String.valueOf(numberOfCourse) + groupNumber;
-        arrayOfAllGroups[countOfGroup - 1] = this;
     }
 
     public UUID getIdGroup() {
@@ -86,17 +74,11 @@ public class Group implements Iterable<Student> {
         return groupName;
     }
 
-    public static Group[] getArrayOfAllGroups() {
-        return arrayOfAllGroups;
-    }
+    public GroupStore getGroupStore() { return groupStore; }
 
-    public static int getCountOfGroup() {
-        return countOfGroup;
-    }
+    public void setGroupStore(GroupStore groupStore) { this.groupStore = groupStore; }
 
-    public HashSet<Student> getArrayWithStudents() {
-        return arrayWithStudents;
-    }
+    public HashSet<Student> getArrayWithStudents() { return arrayWithStudents;   }
 
     public UUID getLeader() {
         return leader;

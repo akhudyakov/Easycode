@@ -28,5 +28,5 @@ public class StudentsStore {
         s.setStudentsStore(this);
     }
 
-    public void removeStudentFromStore(Student s) {storeStudents.remove(s);}
+    protected void removeStudentFromStore(Student s) {storeStudents.remove(s);}
 }

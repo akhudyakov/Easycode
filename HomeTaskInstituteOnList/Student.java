@@ -10,7 +10,7 @@ public class Student extends Human implements Comparable<Student> {
 
     private UUID id;
     private int numberStudent;
-     private Group groupOfStudent;
+    private Group groupOfStudent;
     private StudentsStore studentsStore;
     private HashMap<HomeTask, Marks> homeTasksWithMarks = new HashMap<>();
     private static int countOfStudents; // number of all students
@@ -18,10 +18,9 @@ public class Student extends Human implements Comparable<Student> {
 
     public Student(String lastName, String fisrtName, String middleName, Date birthDate, String docType, String docNumber) {
         super(lastName, fisrtName, middleName, birthDate, docType, docNumber);
-        countOfStudents++;
+//        countOfStudents++;
         this.id = UUID.randomUUID();
-        this.numberStudent = countOfStudents;
-
+        this.numberStudent = countOfStudents++;
     }
 
     public UUID getId() {

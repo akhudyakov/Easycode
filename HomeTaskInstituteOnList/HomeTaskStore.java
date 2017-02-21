@@ -39,6 +39,6 @@ public class HomeTaskStore {
         System.out.println("}");
     }
 
-    public void removeTaskFromTaskStore (HomeTask ht) {storeHomeTasks.remove(ht);}
+    protected void removeTaskFromTaskStore (HomeTask ht) {storeHomeTasks.remove(ht);}
 
 }

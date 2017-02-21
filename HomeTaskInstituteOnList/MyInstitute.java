@@ -18,10 +18,6 @@ public class MyInstitute {
         Student newStudent3 = new Student("Sidorov", "Ivan", "Nikolaevich", Date.valueOf("1995-06-21"), "passport", "MC761254");
         Student newStudent4 = new Student("Aronov", "Nikolay", "Semenovich", Date.valueOf("2001-01-11"), "passport", "ME51298");
 
-        // adding new Groups
-        Group newGroup1 = new Group(1, 3, "7");
-        Group newGroup2 = new Group(1, 3, "8");
-
         // new Student Store1
         StudentsStore studentsStore1 = new StudentsStore();
         // adding Students to the Store1
@@ -29,6 +25,19 @@ public class MyInstitute {
         studentsStore1.addStudentToStore(newStudent2);
         studentsStore1.addStudentToStore(newStudent3);
         studentsStore1.addStudentToStore(newStudent4);
+
+        //create Store of Groups
+        GroupStore groupStore1 = new GroupStore();
+
+        // adding new Groups
+        Group newGroup1 = new Group(1, 3, "7");
+        Group newGroup2 = new Group(1, 3, "8");
+
+        groupStore1.addGroupToStore(newGroup1);
+        groupStore1.addGroupToStore(newGroup1); //negative
+        groupStore1.addGroupToStore(newGroup2);
+
+
 
         // adding Students:1,2,3 to Group1
         newGroup1.addStudentToGroup(newStudent1);

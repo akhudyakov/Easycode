@@ -15,14 +15,12 @@ public class HomeTask {
     private static int count;
 
     public HomeTask(String subjectOfHt, String headerOfHt, String textOfHt) {
-        count++;
-
+//        count++;
         this.id = UUID.randomUUID();
-        this.numberOfHt = count;
+        this.numberOfHt = count++;
         this.subjectOfHt = subjectOfHt;
         this.headerOfHt = headerOfHt;
         this.textOfHt = textOfHt;
-
     }
 
     public UUID getId() {
