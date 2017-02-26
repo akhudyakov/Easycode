@@ -7,7 +7,7 @@ import java.util.UUID;
  */
 public class HomeTask {
     private UUID id;
-//    private Marks mark;
+    private HomeTaskStore homeTaskStore;
     private String subjectOfHt;
     private int numberOfHt;
     private String headerOfHt;
@@ -15,14 +15,12 @@ public class HomeTask {
     private static int count;
 
     public HomeTask(String subjectOfHt, String headerOfHt, String textOfHt) {
-        count++;
-
+//        count++;
         this.id = UUID.randomUUID();
-        this.numberOfHt = count;
+        this.numberOfHt = count++;
         this.subjectOfHt = subjectOfHt;
         this.headerOfHt = headerOfHt;
         this.textOfHt = textOfHt;
-
     }
 
     public UUID getId() {
@@ -33,9 +31,7 @@ public class HomeTask {
         return subjectOfHt;
     }
 
-    public int getNumberOfHt() {
-        return numberOfHt;
-    }
+    public int getNumberOfHt() { return numberOfHt;  }
 
     public String getHeaderOfHt() {
         return headerOfHt;
@@ -45,9 +41,23 @@ public class HomeTask {
         return textOfHt;
     }
 
+    public HomeTaskStore getHomeTaskStore() { return homeTaskStore;  }
+
+    public static int getCount() { return count;  }
+
+    public void setHomeTaskStore(HomeTaskStore homeTaskStore) { this.homeTaskStore = homeTaskStore; }
+
+    public void setSubjectOfHt(String subjectOfHt) {  this.subjectOfHt = subjectOfHt;    }
+
+    public void setNumberOfHt(int numberOfHt) {     this.numberOfHt = numberOfHt;    }
+
+    public void setHeaderOfHt(String headerOfHt) {     this.headerOfHt = headerOfHt;    }
+
+    public void setTextOfHt(String textOfHt) {        this.textOfHt = textOfHt;    }
+
     public String toString() {
-        String result = "Home task with number: " + getNumberOfHt() + " has the  Subject: " + getSubjectOfHt() +
-                "; the header is: " + getHeaderOfHt() + " and text is: " + getTextOfHt(); // + (mark != null ? ", Mark is: "+ getMark() : ", There is no mark for the Home Task");
+        String result = "Home task with number: " + getNumberOfHt() + " with the  Subject: " + getSubjectOfHt() +
+                "; the header is: " + getHeaderOfHt() + " and text is: " + getTextOfHt();
         return result;
     }
 

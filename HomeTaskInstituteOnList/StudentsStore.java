@@ -1,5 +1,7 @@
 package HomeTaskInstituteOnList;
 
+import java.util.Comparator;
+import java.util.TreeMap;
 import java.util.TreeSet;
 
 /**
@@ -7,7 +9,8 @@ import java.util.TreeSet;
  */
 public class StudentsStore {
 
-    private TreeSet<Student> storeStudents = new TreeSet<> ();
+    private TreeSet<Student> storeStudents = new TreeSet<>();
+
 
     public TreeSet<Student> getStoreStudents() {
         return storeStudents;
@@ -22,7 +25,8 @@ public class StudentsStore {
 
     public void addStudentToStore(Student s) {
         storeStudents.add(s);
+        s.setStudentsStore(this);
     }
 
-
+    protected void removeStudentFromStore(Student s) {storeStudents.remove(s);}
 }
