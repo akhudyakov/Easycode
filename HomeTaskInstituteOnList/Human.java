@@ -16,9 +16,9 @@ public abstract class Human implements LeaveTheInstitute {
     private String documentNumber;
 
 
-    public Human (String lastName, String fisrtName, String middleName, Date birthDate, String docType, String docNumber) {
+    public Human (String lastName, String firstName, String middleName, Date birthDate, String docType, String docNumber) {
 
-        this.firstName = fisrtName;
+        this.firstName = firstName;
         this.lastName = lastName;
         this.middleName = middleName;
         this.birthDate = birthDate;

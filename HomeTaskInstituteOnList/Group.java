@@ -146,7 +146,6 @@ public class Group implements Iterable<Student> {
 
     public void printListOfStudentsInTheGroup() {
         String result = "\n The " + this.toString() + " contains next Students: \n{";
-        //Iterator<Student> studentIterator = arrayWithStudents.iterator();
         Iterator<Student> studentIterator = this.iterator();
         boolean exist;
 
@@ -162,10 +161,9 @@ public class Group implements Iterable<Student> {
 
         if (!arrayWithStudents.contains(st)) {
           if (arrayWithStudents.size() < getMax_Number_Students_In_Group()) {
-//              this.countOfGroupMembers++;
               this.arrayWithStudents.add(st);
               st.setGroupOfStudent(this);
-              System.out.println("Successfull!!! Student with Name: " + WorkWithStudent.getStudentFullNameByStudent(st) + " and with Number: " +
+              System.out.println("Successful!!! Student with Name: " + WorkWithStudent.getStudentFullNameByStudent(st) + " and with Number: " +
                       st.getNumberStudent() + " has been included into Group " + getGroupName());
           } else {
               System.out.println("Error!!! " + this.toString() + " is full. We cannot add the " + st.toString() +
