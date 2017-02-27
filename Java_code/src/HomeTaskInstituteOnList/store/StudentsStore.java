@@ -1,7 +1,7 @@
-package HomeTaskInstituteOnList;
+package HomeTaskInstituteOnList.store;
 
-import java.util.Comparator;
-import java.util.TreeMap;
+import HomeTaskInstituteOnList.entity.Student;
+
 import java.util.TreeSet;
 
 /**
@@ -28,5 +28,5 @@ public class StudentsStore {
         s.setStudentsStore(this);
     }
 
-    protected void removeStudentFromStore(Student s) {storeStudents.remove(s);}
+    public void removeStudentFromStore(Student s) {storeStudents.remove(s);}
 }
