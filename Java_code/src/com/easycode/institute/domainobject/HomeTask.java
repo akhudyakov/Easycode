@@ -18,10 +18,33 @@ public class HomeTask {
 
     public HomeTask(String subjectOfHt, String headerOfHt, String textOfHt) {
         this.id = UUID.randomUUID();
-        this.numberOfHt = count++;
+        this.numberOfHt = ++count;
         this.subjectOfHt = subjectOfHt;
         this.headerOfHt = headerOfHt;
         this.textOfHt = textOfHt;
+    }
+
+    public String toString() {
+        String result = "Home task with number: " + getNumberOfHt() + " with the  Subject: " + getSubjectOfHt() +
+                "; the header is: " + getHeaderOfHt() + " and text is: " + getTextOfHt();
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null) return false;
+        if (!(this instanceof Object)) return false;
+        if (this.getClass() != o.getClass()) return false;
+        if (this.hashCode() != o.hashCode()) return false;
+
+        HomeTask ht = (HomeTask) o;
+        if (this.id != ht.id) return false;
+        if (this.subjectOfHt != ht.subjectOfHt) return false;
+        if (this.headerOfHt != ht.headerOfHt) return false;
+        if (this.textOfHt != ht.textOfHt) return false;
+        if (this.numberOfHt != ht.numberOfHt) return false;
+
+        return true;
     }
 
     public UUID getId() {
@@ -55,44 +78,5 @@ public class HomeTask {
     public void setHeaderOfHt(String headerOfHt) {     this.headerOfHt = headerOfHt;    }
 
     public void setTextOfHt(String textOfHt) {        this.textOfHt = textOfHt;    }
-
-    public String toString() {
-        String result = "Home task with number: " + getNumberOfHt() + " with the  Subject: " + getSubjectOfHt() +
-                "; the header is: " + getHeaderOfHt() + " and text is: " + getTextOfHt();
-        return result;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == null) return false;
-        if (!(this instanceof Object)) return false;
-        if (this.getClass() != o.getClass()) return false;
-        if (this.hashCode() != o.hashCode()) return false;
-
-        HomeTask ht = (HomeTask) o;
-        if (this.id != ht.id) return false;
-        if (this.subjectOfHt != ht.subjectOfHt) return false;
-        if (this.headerOfHt != ht.headerOfHt) return false;
-        if (this.textOfHt != ht.textOfHt) return false;
-        if (this.numberOfHt != ht.numberOfHt) return false;
-
-        return true;
-    }
-
-/*
-    public int getMark() {
-        return mark.getMark();
-
-    }
-
-    public static int getMarkOfHomeTask(HomeTask ht) {
-        int mark = ht.getMark();
-        return mark;
-    }
-
-    public void setMarkToHomeTask(Marks mark) {
-        this.mark = mark;
-    }
-*/
 }
 

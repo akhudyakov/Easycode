@@ -17,9 +17,10 @@ public abstract class Human implements LeaveTheInstitute {
     private String documentType;
     private String documentNumber;
 
-    public Human () {}
+    public Human() {
+    }
 
-    public Human (String lastName, String fisrtName, String middleName, Date birthDate, String docType, String docNumber) {
+    public Human(String lastName, String fisrtName, String middleName, Date birthDate, String docType, String docNumber) {
 
         this.firstName = fisrtName;
         this.lastName = lastName;
@@ -61,6 +62,29 @@ public abstract class Human implements LeaveTheInstitute {
         return documentNumber;
     }
 
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
+    }
+
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public void setDocumentType(String documentType) {
+        this.documentType = documentType;
+    }
+
+    public void setDocumentNumber(String documentNumber) {
+        this.documentNumber = documentNumber;
+    }
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;

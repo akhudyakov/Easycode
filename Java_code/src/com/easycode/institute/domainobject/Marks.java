@@ -1,20 +1,18 @@
 package com.easycode.institute.domainobject;
 
+import lesson6.enums.Mark;
+
 /**
  * Created by Andrey on 15.02.2017.
  */
 public enum Marks {
-    TWO(2),
-    THREE(3),
-    FOUR(4),
-    FIVE(5),
-    SIX(6),
-    SEVEN(7),
-    EIGHT(8),
-    NINE(9),
-    TEN(10),
-    ELEVEN(11),
-    TWELVE(12);
+    A(5),
+    B(4),
+    C(4),
+    D(3),
+    E(3),
+    FX(2),
+    F(2);
 
     private int mark;
 
@@ -24,5 +22,33 @@ public enum Marks {
 
     public int getMark() {
         return mark;
+    }
+
+    public static int getIntMarkByBolonMark(Marks m) {
+        int intMark;
+        switch (m) {
+            case A:
+                intMark = 5;
+                break;
+            case B:
+                intMark = 4;
+                break;
+            case C:
+                intMark = 4;
+                break;
+            case D:
+                intMark = 3;
+                break;
+            case E:
+                intMark = 3;
+                break;
+            case FX:
+                intMark = 2;
+                break;
+            default:
+                intMark = 2;
+                break;
+        }
+        return intMark;
     }
 }

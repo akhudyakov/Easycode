@@ -12,9 +12,9 @@ import java.sql.SQLException;
  */
 public class MySqlDaoFactory implements DaoFactory {
 
-    private String username = "root";//Логин пользователя
-    private String password = "mysql";
-    private String url = "jdbc:mysql://localhost:3306/institute";
+    private static String username = "root";//Логин пользователя
+    private static String password = "mysql";
+    private static String url = "jdbc:mysql://localhost:3306/institute?autoReconnect=true&useSSL=false";
     public static final String COM_MYSQL_JDBC_DRIVER = "com.mysql.jdbc.Driver";
 
     public MySqlDaoFactory() {
@@ -42,7 +42,7 @@ public class MySqlDaoFactory implements DaoFactory {
 
     @Override
     public TeacherDao getTeacherDao(Connection connection) {
-        return new MySqlTeacherDao(connection, connection1);
+        return new MySqlTeacherDao(connection);
     }
 }
 

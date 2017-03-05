@@ -2,9 +2,9 @@ package com.easycode.institute.domainobject;
 
 import com.easycode.institute.store.TeacherStore;
 
+import java.sql.RowId;
 import java.util.Date;
 import java.util.NoSuchElementException;
-import java.util.UUID;
 
 /**
  * Created by adminnt on 22.01.17.
@@ -12,12 +12,14 @@ import java.util.UUID;
 public class Teacher extends Human {
 
 
-    private UUID id;
+    private int id;
     private TeacherStore teacherStore;
+
+    public Teacher() {}
 
     public Teacher(String lastName, String fisrtName, String middleName, Date birthDate, String docType, String docNumber) {
         super(lastName, fisrtName, middleName, birthDate, docType, docNumber);
-        this.id = UUID.randomUUID();
+//        this.id = UUID.randomUUID();
     }
 
     @Override
@@ -32,7 +34,7 @@ public class Teacher extends Human {
 
     @Override
     public int hashCode() {
-        return id.hashCode();
+        return teacherStore.hashCode();
     }
 
     @Override
@@ -51,13 +53,13 @@ public class Teacher extends Human {
 
     public String toString() {
 
-        String result = "Teacher with" + " Last Name = " + getLastName() + "; First Name = " + getFirstName() + "ID: " + getId();
+        String result = "Teacher with" + " Last Name = " + getLastName() + "; First Name = " + getFirstName() + "; ID= " + getId();
         return result;
     }
 
-    public UUID getId() {
-        return id;
-    }
+    public int getId() { return id;  }
+
+    public void setId(int id) { this.id = id; }
 
     public TeacherStore getTeacherStore() {
         return teacherStore;

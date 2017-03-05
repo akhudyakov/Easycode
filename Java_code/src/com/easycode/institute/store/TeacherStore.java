@@ -22,7 +22,7 @@ public class TeacherStore {
     }
 
     public void removeTeacherFromStore(Teacher t) {
-        if (!teacherStore.contains(t)) {
+        if (teacherStore.contains(t)) {
             teacherStore.remove(t);
         } else {
             System.out.println("Specific \"" + t.toString() + "\" does not exist in the Store and it cannot be removed");

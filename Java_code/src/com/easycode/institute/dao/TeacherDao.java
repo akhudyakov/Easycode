@@ -12,7 +12,7 @@ public interface TeacherDao {
 
     public Teacher create();
 
-    public Teacher read(int key);
+    public Teacher read(int key) throws SQLException;
 
     public void update(Teacher teacher);
 
