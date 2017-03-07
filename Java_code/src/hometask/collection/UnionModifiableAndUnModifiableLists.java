@@ -39,15 +39,53 @@ public class UnionModifiableAndUnModifiableLists<E> extends AbstractList<E> {
 
     @Override
     public boolean add(E e) {
-        int lastPosition = unModifList.size() + modifList.size() + 1;
         try {
-//            super.add(lastPosition, e);
-//            super.add(e);
             modifList.add(e);
+            return true;
         } catch (Exception e1) {
             e1.printStackTrace();
         }
-        return true;
+        return false;
+    }
+
+    @Override
+    public void add(int index, E element) {
+        if ((index > unModifList.size() - 1) & index < (unModifList.size() + modifList.size() )) {
+            try {
+                modifList.add(index, element);
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
+        } else {
+            throw new UnsupportedOperationException("It is impossible to add element " + element +  " into " + index + " position in the List");
+        }
+    }
+
+    @Override
+    public E set(int index, E element) {
+        if ((index > unModifList.size() - 1) & index < (unModifList.size() + modifList.size() )) {
+            try {
+                E previousElement = modifList.set(index, element);
+                return previousElement;
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
+        } else {
+            throw new UnsupportedOperationException("It is impossible to set element " + element +  " into " + index + " position in the List");
+        }
+        return null;
+    }
+
+    @Override
+    public boolean remove(Object o) {
+        Iter oIterator = new Iter();
+        while (oIterator.hasNext()) {
+            Object n = oIterator.next();
+            if (n.equals(o) & oIterator.currentPosition > unModifList.size() - 1) {
+                return modifList.remove(o);
+            }
+        }
+        return false;
     }
 
     @Override
@@ -56,10 +94,8 @@ public class UnionModifiableAndUnModifiableLists<E> extends AbstractList<E> {
     }
 
     private class Iter implements Iterator<E> {
-
         int currentPosition;
         int nextPosition;
-
 
         @Override
         public boolean hasNext() {
@@ -73,7 +109,7 @@ public class UnionModifiableAndUnModifiableLists<E> extends AbstractList<E> {
                 nextPosition++;
                 return UnionModifiableAndUnModifiableLists.this.get(currentPosition);
             } else {
-                throw new NoSuchElementException();
+                throw new NoSuchElementException("There is no next item in the list");
             }
         }
 
@@ -82,8 +118,7 @@ public class UnionModifiableAndUnModifiableLists<E> extends AbstractList<E> {
             if (UnionModifiableAndUnModifiableLists.this.size() > 0) {
                 modifList.removeAll(modifList);
             } else {
-                System.out.println("There is no items in Array");
-                throw new NoSuchElementException();
+                throw new NoSuchElementException("There is no items in the list");
             }
         }
     }

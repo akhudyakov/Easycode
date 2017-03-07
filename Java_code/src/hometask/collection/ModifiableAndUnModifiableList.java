@@ -1,10 +1,6 @@
 package hometask.collection;
 
-import hometask.collection.UnionModifiableAndUnModifiableLists;
-import lesson8.Holiday;
-
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -26,11 +22,13 @@ public class ModifiableAndUnModifiableList {
 
         UnionModifiableAndUnModifiableLists unionModifiableAndUnModifiableList = new UnionModifiableAndUnModifiableLists(immutableList, modifiedList);
 
+        System.out.println("Before adding: " + unionModifiableAndUnModifiableList);
         unionModifiableAndUnModifiableList.add("d");
-        System.out.println(unionModifiableAndUnModifiableList);
-        unionModifiableAndUnModifiableList.remove("d");
+        System.out.println("After adding \"d\": " + unionModifiableAndUnModifiableList);
 
-        System.out.println(unionModifiableAndUnModifiableList);
+        unionModifiableAndUnModifiableList.remove("a");
+        System.out.println("After deleting: " + unionModifiableAndUnModifiableList);
+
 //        for (int i = 0; i < unionModifiableAndUnModifiableList.size() ; i++) {
 //            System.out.println(unionModifiableAndUnModifiableList.get(i));
 //        }

@@ -7,13 +7,23 @@ import java.util.Date;
  * Created by adminnt on 06.02.17.
  */
 public class HolidayOnTreeSet implements Comparable<HolidayOnTreeSet> {
-
     private Date date;
     private String name;
 
-    public HolidayOnTreeSet(Date d, String s) {
-        this.date = d;
-        this.name = s;
+    HolidayOnTreeSet(Date date, String holidayName) {
+        this.date = date;
+        this.name = holidayName;
+    }
+
+    @Override
+    public int compareTo(HolidayOnTreeSet h) {
+        int time = getDate().compareTo(h.getDate());
+
+        if (time != 0) {
+            return time;
+        } else {
+            return getName().compareTo(h.getName());
+        }
     }
 
     @Override
@@ -32,17 +42,4 @@ public class HolidayOnTreeSet implements Comparable<HolidayOnTreeSet> {
         return name;
     }
 
-    @Override
-    public int compareTo(HolidayOnTreeSet h) {
-
-        int time = this.getDate().compareTo(h.getDate());
-        if (time != 0) {
-            return time;
-        } else {
-            int s = this.getName().compareTo(h.getName());
-            return s;
-        }
-    }
 }
-
-

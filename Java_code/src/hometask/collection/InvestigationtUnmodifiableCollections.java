@@ -7,68 +7,61 @@ import java.util.List;
 
 /**
  * Created by Andrey on 17.02.2017.
- *
- *    IT IS NOT HOME TASK
- *
+ * <p>
+ * IT IS NOT HOME TASK
  */
 public class InvestigationtUnmodifiableCollections {
 
     public static void main(String[] args) {
-       List<String> modifiableList = new ArrayList<String>();
+        List<String> modifiableList = new ArrayList<>();
         modifiableList.add("a");
 
 
-
-        System.out.println("modifiableList:"+modifiableList);
+        System.out.println("modifiableList: " + modifiableList);
+        System.out.println("modifiableList size: " + modifiableList.size());
         System.out.println("--");
 
 
         //unModifiableList
 
-        System.out.println(modifiableList.size());
 
-        List<String> unModifiableList= Collections.unmodifiableList(
-                modifiableList);
+        List<String> unModifiableList = Collections.unmodifiableList(modifiableList);
 
         modifiableList.add("b");
 
-        boolean exceptionThrown=false;
+        boolean exceptionThrown = false;
         try {
             unModifiableList.add("b");
-
         } catch (UnsupportedOperationException e) {
-            exceptionThrown=true;
+            exceptionThrown = true;
             System.out.println("unModifiableList.add() not supported");
         }
 
 
-        System.out.println("modifiableList:"+modifiableList);
-        System.out.println("unModifiableList:"+unModifiableList);
+        System.out.println("modifiableList:" + modifiableList);
+        System.out.println("unModifiableList:" + unModifiableList);
 
 
         System.out.println("--");
 
-        List<String> immutableList=Collections.unmodifiableList(
-                new ArrayList<String>(modifiableList));
+        List<String> immutableList = Collections.unmodifiableList(
+                new ArrayList<>(modifiableList));
 
         modifiableList.add("c");
 
-        exceptionThrown=false;
+        exceptionThrown = false;
         try {
             immutableList.add("c");
-
         } catch (UnsupportedOperationException e) {
-            exceptionThrown=true;
+            exceptionThrown = true;
             System.out.println("immutableList.add() not supported");
         }
 
 
-
-        System.out.println("modifiableList:"+modifiableList);
-        System.out.println("unModifiableList:"+unModifiableList);
-        System.out.println("immutableList:"+immutableList);
+        System.out.println("modifiableList:" + modifiableList);
+        System.out.println("unModifiableList:" + unModifiableList);
+        System.out.println("immutableList:" + immutableList);
         System.out.println("--");
-
 
 
     }

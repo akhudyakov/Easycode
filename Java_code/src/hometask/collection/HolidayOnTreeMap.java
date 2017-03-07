@@ -9,9 +9,14 @@ public class HolidayOnTreeMap implements Comparable<HolidayOnTreeMap> {
     private Calendar date;
     private String name;
 
-    public HolidayOnTreeMap(Calendar holidayDate, String holidayName) {
-        this.date = holidayDate;
+    HolidayOnTreeMap(Calendar calendar, String holidayName) {
+        this.date = calendar;
         this.name = holidayName;
+    }
+
+    @Override
+    public int compareTo(HolidayOnTreeMap h) {
+        return getDate().compareTo(h.getDate());
     }
 
     @Override
@@ -22,13 +27,6 @@ public class HolidayOnTreeMap implements Comparable<HolidayOnTreeMap> {
                 '}';
     }
 
-
-    @Override
-    public int compareTo(HolidayOnTreeMap h) {
-        int compare = this.getDate().compareTo(h.getDate())&this.getName().compareTo(h.getName());
-        return compare;
-    }
-
     public String getName() {
         return name;
     }
@@ -36,8 +34,6 @@ public class HolidayOnTreeMap implements Comparable<HolidayOnTreeMap> {
     public Calendar getDate() {
         return date;
     }
-
-
 }
 
 

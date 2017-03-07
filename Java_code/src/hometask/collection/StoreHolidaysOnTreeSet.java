@@ -22,18 +22,6 @@ public class StoreHolidaysOnTreeSet {
         holidayTreeSet.add(h);
     }
 
-    @Override
-    public String toString() {
-        return holidayTreeSet.toString();
-    }
-
-    @Author(authorName = "Petrov", dateOfModification = "2017/01/24")
-    public TreeSet<HolidayOnTreeSet> getHolidayTreeSet() {
-        return holidayTreeSet;
-    }
-
-
-
     public void printToday() {
 
         Calendar cal = Calendar.getInstance();
@@ -121,7 +109,7 @@ public class StoreHolidaysOnTreeSet {
                     System.out.print(" - " + currentHoliday.getName() + "\n");
                     printedFirstNodeForTheDate = true;
                 } else {
-                    System.out.print("                " + currentHoliday.getName() + "\n");
+                    System.out.print("              " + currentHoliday.getName() + "\n");
                 }
 
 
@@ -132,6 +120,15 @@ public class StoreHolidaysOnTreeSet {
         }
     }
 
+    @Override
+    public String toString() {
+        return holidayTreeSet.toString();
+    }
+
+    @Author(authorName = "Petrov", dateOfModification = "2017/01/24")
+    public TreeSet<HolidayOnTreeSet> getHolidayTreeSet() {
+        return holidayTreeSet;
+    }
 }
 
 
