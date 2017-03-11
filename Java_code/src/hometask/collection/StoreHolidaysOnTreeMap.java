@@ -32,7 +32,7 @@ public class StoreHolidaysOnTreeMap {
     public void printToday() {
 
         Calendar cal = Calendar.getInstance();
-        WorkWithDate.trim(cal);
+        DateUtils.trim(cal);
         Date trimToday = cal.getTime();
         cal.add(Calendar.DATE, 1);
         Date tomorrow = cal.getTime();
@@ -50,7 +50,7 @@ public class StoreHolidaysOnTreeMap {
 
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.DATE, 1);
-        WorkWithDate.trim(cal);
+        DateUtils.trim(cal);
         Date trimTomorrow = cal.getTime();
         cal.add(Calendar.DATE, 1);
         Date afterTomorrow = cal.getTime();
@@ -70,7 +70,7 @@ public class StoreHolidaysOnTreeMap {
         Calendar cal = Calendar.getInstance();
 
         cal.add(Calendar.DATE, 2);
-        WorkWithDate.trim(cal);
+        DateUtils.trim(cal);
         Date twoDaysLater = cal.getTime();
 
         cal.add(Calendar.DATE, 3);
@@ -89,7 +89,7 @@ public class StoreHolidaysOnTreeMap {
             Date currentHoliday = (Date) e.getKey();
 
 
-            if (WorkWithDate.trim(previousHoliday).before(WorkWithDate.trim(currentHoliday))) {
+            if (DateUtils.trim(previousHoliday).before(DateUtils.trim(currentHoliday))) {
                 printedFirstNodeForTheDate = false;
             }
             // for each date print date only first time

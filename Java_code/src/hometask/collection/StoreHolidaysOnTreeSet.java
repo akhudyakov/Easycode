@@ -26,7 +26,7 @@ public class StoreHolidaysOnTreeSet {
 
         Calendar cal = Calendar.getInstance();
         Date today = cal.getTime();
-        String todayString = WorkWithDate.getOnlyStringDateFromDate(today);
+        String todayString = DateUtils.getOnlyStringDateFromDate(today);
 
         boolean existFirstNodeForTheDate = false;
 
@@ -34,7 +34,7 @@ public class StoreHolidaysOnTreeSet {
         Iterator<HolidayOnTreeSet> holidayIterator = holidayTreeSet.iterator();
         while (holidayIterator.hasNext()) {
             HolidayOnTreeSet currentHoliday = holidayIterator.next();
-            String iterDateString = WorkWithDate.getOnlyStringDateFromDate(currentHoliday.getDate());
+            String iterDateString = DateUtils.getOnlyStringDateFromDate(currentHoliday.getDate());
 
             if (iterDateString.equals(todayString)) {
                 if (!existFirstNodeForTheDate) {
@@ -53,7 +53,7 @@ public class StoreHolidaysOnTreeSet {
 
         cal.add(Calendar.DATE, 1);
         Date tomorrow = cal.getTime();
-        String tomorrowString = WorkWithDate.getOnlyStringDateFromDate(tomorrow);
+        String tomorrowString = DateUtils.getOnlyStringDateFromDate(tomorrow);
 
         boolean existFirstNodeForTheDate = false;
 
@@ -61,7 +61,7 @@ public class StoreHolidaysOnTreeSet {
         Iterator<HolidayOnTreeSet> holidayIterator = holidayTreeSet.iterator();
         while (holidayIterator.hasNext()) {
             HolidayOnTreeSet currentHoliday = holidayIterator.next();
-            String iterDateString = WorkWithDate.getOnlyStringDateFromDate(currentHoliday.getDate());
+            String iterDateString = DateUtils.getOnlyStringDateFromDate(currentHoliday.getDate());
 
             if (iterDateString.equals(tomorrowString)) {
 

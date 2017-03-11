@@ -8,7 +8,7 @@ import java.util.Date;
 /**
  * Created by Andrey on 10.02.2017.
  */
-public class WorkWithDate {
+public class DateUtils {
 
     public static String getOnlyStringDateFromDate(Date d) {
 

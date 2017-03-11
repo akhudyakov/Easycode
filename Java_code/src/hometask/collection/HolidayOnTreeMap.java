@@ -9,7 +9,7 @@ public class HolidayOnTreeMap implements Comparable<HolidayOnTreeMap> {
     private Calendar date;
     private String name;
 
-    HolidayOnTreeMap(Calendar calendar, String holidayName) {
+    public HolidayOnTreeMap(Calendar calendar, String holidayName) {
         this.date = calendar;
         this.name = holidayName;
     }

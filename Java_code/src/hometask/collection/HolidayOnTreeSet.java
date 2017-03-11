@@ -10,7 +10,7 @@ public class HolidayOnTreeSet implements Comparable<HolidayOnTreeSet> {
     private Date date;
     private String name;
 
-    HolidayOnTreeSet(Date date, String holidayName) {
+    public HolidayOnTreeSet(Date date, String holidayName) {
         this.date = date;
         this.name = holidayName;
     }
@@ -41,5 +41,4 @@ public class HolidayOnTreeSet implements Comparable<HolidayOnTreeSet> {
     public String getName() {
         return name;
     }
-
 }
