@@ -27,23 +27,19 @@ public class ThreadFillListWithUsingSleep extends Thread {
 
             if (sizeList > 0) {
                 String lastStringInList = sharedList.getStringArrayList().get(sizeList - 1);
-                last2Symbols = lastStringInList.length() == 1 ? lastStringInList + "Z" : lastStringInList;
+                last2Symbols = lastStringInList.length() == 1 ? lastStringInList + DemoFillListWithUsingSleep.lastLetter : lastStringInList;
                 char temp = firstLetter;
                 stringToAdd = lastStringInList;
 
                 while (!(stringToAdd.equals(last2Symbols))) {
                     temp++;
                     stringToAdd = lastStringInList + Character.toString(temp);
-
-                    if (stringToAdd.length() < 3) {
-                        sharedList.addToList(stringToAdd);
-                        System.out.println(Thread.currentThread().getName() + " has just add: " + stringToAdd);
-                    }
+                    sharedList.addToList(stringToAdd);
+                    System.out.println(Thread.currentThread().getName() + " has just add: " + stringToAdd);
                 }
 
                 if (!stringToAdd.equals(DemoFillListWithUsingSleep.last2Letters)) {
                     try {
-//                        System.out.println(Thread.currentThread().getName() + " goes to sleep");
                         Thread.sleep(100);
                     } catch (InterruptedException e) {
                         e.printStackTrace();

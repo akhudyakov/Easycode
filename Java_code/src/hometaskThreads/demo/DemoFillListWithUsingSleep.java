@@ -11,6 +11,7 @@ import static java.lang.Thread.sleep;
 public class DemoFillListWithUsingSleep {
 
     public static char firstLetter = 'A';
+    public static char lastLetter = 'Z';
     public static String last2Letters = "ZZ";
 
     public static void main(String[] args) {
@@ -27,19 +28,16 @@ public class DemoFillListWithUsingSleep {
         threadFillListWithUsingSleep3.start();
         threadFillListWithUsingSleep4.start();
 
-//        System.out.println(Thread.currentThread().getName() + " Before For thread state: " + threadFillListWithUsingSleep1.getState());
 
-        for (char s = firstLetter; s <= 'Z'; s++) {
-//        System.out.println(Thread.currentThread().getName() + " in FOR state: " + threadFillListWithUsingSleep1.getState());
+        for (char s = firstLetter; s <= lastLetter; s++) {
             sharedList.addToList(Character.toString(s));
             System.out.println("Main thread add: " + s);
             int sizeList = sharedList.getStringArrayList().size();
             String lastCharacterInList = sharedList.getStringArrayList().get(sizeList - 1);
 
-            while (!(lastCharacterInList.length() == 2 & lastCharacterInList.endsWith("Z"))) {
+            while (!(lastCharacterInList.length() == 2 & lastCharacterInList.endsWith(String.valueOf(lastLetter)))) {
                 try {
                     sleep(1000);
-//                    Thread.currentThread().sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

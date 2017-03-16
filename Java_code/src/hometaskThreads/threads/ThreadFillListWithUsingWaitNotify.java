@@ -1,7 +1,6 @@
 package hometaskThreads.threads;
 
 import hometaskThreads.SharedList;
-import hometaskThreads.demo.DemoFillListWithUsingSleep;
 import hometaskThreads.demo.DemoFillListWithUsingWaitNotify;
 
 /**
@@ -26,7 +25,7 @@ public class ThreadFillListWithUsingWaitNotify extends Thread {
 
             while (!last2Symbols.equals(DemoFillListWithUsingWaitNotify.last2Letters)) {
 
-                if (DemoFillListWithUsingWaitNotify.mainAdd1Letter) {
+                if (DemoFillListWithUsingWaitNotify.mainThreadAdd1Letter) {
                     int sizeList = sharedList.getStringArrayList().size();
                     String lastStringInList = sharedList.getStringArrayList().get(sizeList - 1);
                     last2Symbols = lastStringInList.length() == 1 ? lastStringInList + "Z" : lastStringInList;
@@ -36,30 +35,24 @@ public class ThreadFillListWithUsingWaitNotify extends Thread {
                     while (!(stringToAdd.equals(last2Symbols))) {
                         temp++;
                         stringToAdd = lastStringInList + Character.toString(temp);
-
-                        if (stringToAdd.length() < 3) {
-                            sharedList.addToList(stringToAdd);
-                            System.out.println(Thread.currentThread().getName() + " has just add: " + stringToAdd);
-                        }
+                        sharedList.addToList(stringToAdd);
+                        System.out.println(Thread.currentThread().getName() + " has just add: " + stringToAdd);
                     }
 
-                    if (!stringToAdd.equals(DemoFillListWithUsingSleep.last2Letters)) {
-                        DemoFillListWithUsingWaitNotify.mainAdd1Letter = false;
-                        System.out.println(Thread.currentThread().getName() + " goes to wait");
-                        sharedList.notify();
+                    if (!stringToAdd.equals(DemoFillListWithUsingWaitNotify.last2Letters)) {
+                        DemoFillListWithUsingWaitNotify.mainThreadAdd1Letter = false;
+                        sharedList.notifyAll();
                         try {
-
                             sharedList.wait();
-
-                        System.out.println(Thread.currentThread().getName() + " in Main app is State in " + Thread.currentThread().getState());
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
+                    } else {
+                        DemoFillListWithUsingWaitNotify.finish = true;
                     }
-                } else {
-                    sharedList.notify();
                 }
             }
+            sharedList.notifyAll();
         }
     }
 }
