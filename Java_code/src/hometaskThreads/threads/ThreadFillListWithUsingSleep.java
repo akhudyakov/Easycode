@@ -4,7 +4,7 @@ import hometaskThreads.SharedList;
 import hometaskThreads.demo.DemoFillListWithUsingSleep;
 
 /**
- * Created by Student on 25.02.2017.
+ * Created by Andrey on 16.03.2017.
  */
 public class ThreadFillListWithUsingSleep extends Thread {
 

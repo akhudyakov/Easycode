@@ -6,7 +6,7 @@ import hometaskThreads.threads.ThreadFillListWithUsingSleep;
 import static java.lang.Thread.sleep;
 
 /**
- * Created by Andrey on 25.02.2017.
+ * Created by Andrey on 16.03.2017.
  */
 public class DemoFillListWithUsingSleep {
 
@@ -27,7 +27,6 @@ public class DemoFillListWithUsingSleep {
         threadFillListWithUsingSleep2.start();
         threadFillListWithUsingSleep3.start();
         threadFillListWithUsingSleep4.start();
-
 
         for (char s = firstLetter; s <= lastLetter; s++) {
             sharedList.addToList(Character.toString(s));

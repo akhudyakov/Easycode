@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Andrey on 22.02.2017.
+ * Created by Andrey on 16.03.2017.
  */
 public class SharedList {
 

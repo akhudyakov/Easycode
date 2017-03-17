@@ -4,7 +4,7 @@ import hometaskThreads.SharedList;
 import hometaskThreads.demo.DemoFillListWithUsingWaitNotify;
 
 /**
- * Created by Student on 25.02.2017.
+ * Created by Andrey on 17.03.2017.
  */
 public class ThreadFillListWithUsingWaitNotify extends Thread {
 
@@ -28,7 +28,7 @@ public class ThreadFillListWithUsingWaitNotify extends Thread {
                 if (DemoFillListWithUsingWaitNotify.mainThreadAdd1Letter) {
                     int sizeList = sharedList.getStringArrayList().size();
                     String lastStringInList = sharedList.getStringArrayList().get(sizeList - 1);
-                    last2Symbols = lastStringInList.length() == 1 ? lastStringInList + "Z" : lastStringInList;
+                    last2Symbols = lastStringInList.length() == 1 ? lastStringInList + DemoFillListWithUsingWaitNotify.lastLetter : lastStringInList;
                     char temp = firstLetter;
                     stringToAdd = lastStringInList;
 
