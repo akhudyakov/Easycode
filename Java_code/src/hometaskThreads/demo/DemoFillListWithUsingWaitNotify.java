@@ -20,11 +20,11 @@ public class DemoFillListWithUsingWaitNotify {
 
         ThreadFillListWithUsingWaitNotify threadFillListWithUsingWaitNotify1 = new ThreadFillListWithUsingWaitNotify(sharedList, "Thread 1");
         ThreadFillListWithUsingWaitNotify threadFillListWithUsingWaitNotify2 = new ThreadFillListWithUsingWaitNotify(sharedList, "Thread 2");
-//        ThreadFillListWithUsingWaitNotify threadFillListWithUsingWaitNotify3 = new ThreadFillListWithUsingWaitNotify(sharedList, "Thread 3");
+        ThreadFillListWithUsingWaitNotify threadFillListWithUsingWaitNotify3 = new ThreadFillListWithUsingWaitNotify(sharedList, "Thread 3");
 
         threadFillListWithUsingWaitNotify1.start();
         threadFillListWithUsingWaitNotify2.start();
-//        threadFillListWithUsingWaitNotify3.start();  it does not work with 3 threads
+        threadFillListWithUsingWaitNotify3.start();  //it does not work with 3 threads
 
         synchronized (sharedList) {
             while (firstLetter != lastLetter & !finish) {
@@ -46,7 +46,7 @@ public class DemoFillListWithUsingWaitNotify {
 
         threadFillListWithUsingWaitNotify1.interrupt();
         threadFillListWithUsingWaitNotify2.interrupt();
-//        threadFillListWithUsingWaitNotify3.interrupt();
+        threadFillListWithUsingWaitNotify3.interrupt();
 
         System.out.println(sharedList.toString());
     }

@@ -50,6 +50,13 @@ public class ThreadFillListWithUsingWaitNotify extends Thread {
                     } else {
                         DemoFillListWithUsingWaitNotify.finish = true;
                     }
+                } else {
+                    sharedList.notifyAll();
+                    try {
+                        sharedList.wait();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
             sharedList.notifyAll();
