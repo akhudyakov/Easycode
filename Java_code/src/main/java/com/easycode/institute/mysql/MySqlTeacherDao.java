@@ -2,7 +2,6 @@ package com.easycode.institute.mysql;
 
 import com.easycode.institute.dao.TeacherDao;
 import com.easycode.institute.domainobject.Teacher;
-import com.easycode.institute.store.TeacherStore;
 import com.mysql.jdbc.Connection;
 
 import java.sql.PreparedStatement;

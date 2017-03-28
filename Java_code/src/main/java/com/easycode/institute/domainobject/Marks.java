@@ -1,7 +1,5 @@
 package com.easycode.institute.domainobject;
 
-import lesson6.enums.Mark;
-
 /**
  * Created by Andrey on 15.02.2017.
  */

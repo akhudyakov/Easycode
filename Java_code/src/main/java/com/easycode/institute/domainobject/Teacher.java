@@ -2,7 +2,6 @@ package com.easycode.institute.domainobject;
 
 import com.easycode.institute.store.TeacherStore;
 
-import java.sql.RowId;
 import java.util.Date;
 import java.util.NoSuchElementException;
 
